@@ -26,6 +26,7 @@ function App() {
         </div>
       </div>
       <AdrianContributor name={"John"}/>
+      <AdrianContributor name={"Jane"}/>
       {/* <AdrianContributor />
       <AdrianContributor />
       <AdrianContributor />
