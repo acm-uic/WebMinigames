@@ -25,12 +25,8 @@ function App() {
           @Ajknight121
         </div>
       </div>
-      <AdrianContributor name={"John"}/>
+      <AdrianContributor name={"John"} username="@Johnmail"/>
       <AdrianContributor name={"Jane"}/>
-      {/* <AdrianContributor />
-      <AdrianContributor />
-      <AdrianContributor />
-      <AdrianContributor /> */}
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
