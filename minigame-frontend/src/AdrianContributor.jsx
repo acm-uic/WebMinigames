@@ -7,7 +7,7 @@ export function AdrianContributor(props) {
         <img src={AdrianProfileImg} width={"100px"}/>
         <div>
           {props.name}
-          @Ajknight121
+          {props.username ? props.username : " No username"}
         </div>
       </div>
   )
