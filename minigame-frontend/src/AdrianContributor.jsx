@@ -1,5 +1,4 @@
-import AdrianProfileImg from './Arrow Swarm trails.png'
-
+import AdrianProfileImg from "./Arrow Swarm trails.png";
 
 export function AdrianContributor() {
   return (
