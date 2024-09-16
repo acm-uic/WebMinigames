@@ -1,4 +1,4 @@
-import profileImg from "../assets/images/JinCardImage.jpeg";
+import profileImg from "../assets/images/JinCardImage.jpeg"
 
 export function JinContributor() {
     return (
