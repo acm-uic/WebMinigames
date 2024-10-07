@@ -15,10 +15,10 @@ export const Profile = () => {
         </div>
       </div>
       <div id="user-favorites">
-        // will hold Game components
+        {/* will hold Game components */}
       </div>
       <div id="user-rankings">
-        // will hold Ranking components
+        {/* will hold Ranking components */}
       </div>
     </div>
   );
