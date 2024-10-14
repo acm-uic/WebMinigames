@@ -11,7 +11,7 @@ export const GamePage = () => {
     else if(buttonState == 1 && iState == 0){
       setButtonState(0);
     }
-    console.log(buttonState);
+    //console.log(buttonState); //debug that prints the comments section state
   }
   return (
     <div>
@@ -22,8 +22,8 @@ export const GamePage = () => {
           </div>
         </div>
         <div className='w-full bg-[#DAE7FD] h-[50px] flex flex-row justify-center'>
-          <div onClick={()=>handleCommentsMenu(0)} className={(buttonState==0) ? 'text-center text-[24px] content-center m-auto font-bold underline' : 'text-center text-[24px] content-center m-auto'}>Comments</div>
-          <div onClick={()=>handleCommentsMenu(1)} className={(buttonState==0) ? 'text-center text-[24px] content-center m-auto' : 'text-center text-[24px] content-center m-auto font-bold underline'}>Leaderboard</div>
+          <div onClick={()=>handleCommentsMenu(0)} className={`text-center text-[24px] content-center m-auto ${(buttonState==0) ? 'font-bold underline' : 'cursor-pointer'}`}>Comments</div>
+          <div onClick={()=>handleCommentsMenu(1)} className={`text-center text-[24px] content-center m-auto ${(buttonState==0) ? 'cursor-pointer' : 'font-bold underline'}`}>Leaderboard</div>
         </div>
         <div className='w-full bg-[#DAE7FD] h-[525px] border border-black'>
             
