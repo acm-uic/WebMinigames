@@ -1,7 +1,7 @@
 import React from 'react'
 import { GameRowComponent } from "../components/GameRowComponent.jsx";
 
-export const Homepage = () => {
+export default function Homepage () {
   return (
     <div>
       <ol >
