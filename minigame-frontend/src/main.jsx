@@ -5,6 +5,7 @@ import { AdrianContributor } from "./contributors/Contributors";
 import Homepage from "./page/Homepage.jsx";
 import AllGames from "./page/AllGames.jsx";
 import Profile from "./page/Profile.jsx";
+import GamePage from "./page/GamePage.jsx";
 
 import "./index.css";
 
@@ -17,6 +18,7 @@ export default function App() {
           <Route index element={<Homepage />} />
           <Route path="all-games" element={<AllGames />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="game" element={<GamePage/>} />
         </Route>
       </Routes>
     </BrowserRouter>

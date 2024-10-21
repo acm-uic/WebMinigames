@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 
-export const GamePage = () => {
+export default function GamePage() {
   const [buttonState, setButtonState] = useState(0);
 
   function handleCommentsMenu(iState){
@@ -15,7 +15,7 @@ export const GamePage = () => {
   }
   return (
     <div>
-        <div className='w-full bg-white-500 h-[700px] border-y-2 border-black flex flex-col justify-center'>
+        <div className='w-full bg-white-500 h-[700px] border-y-2 border-black relative flex flex-col justify-center'>
           <div className='text-center text-[36px] absolute w-full top-[0px]'>(placeholder game name)</div>
           <div className='w-[900px] bg-gray-300 h-[550px] content-center m-auto'>
             
