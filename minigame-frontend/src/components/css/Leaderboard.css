@@ -41,7 +41,8 @@
 }
 
 .game-name {
-  font-size: 3.5rem;
+  font-size: clamp(20px, 8vw, 700px);
+
   text-align: center;
   font-family: "Play", sans-serif;
   margin-bottom: 35px;

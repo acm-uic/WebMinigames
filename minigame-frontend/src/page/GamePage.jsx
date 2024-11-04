@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from "react";
+import Leaderboard from '../components/Leaderboard';
 
 export default function GamePage() {
   const [buttonState, setButtonState] = useState(0);
@@ -26,6 +27,7 @@ export default function GamePage() {
           <div onClick={()=>handleCommentsMenu(1)} className={`text-center text-[24px] content-center m-auto ${(buttonState==0) ? 'cursor-pointer' : 'font-bold underline'}`}>Leaderboard</div>
         </div>
         <div className='w-full bg-[#DAE7FD] h-[525px] border border-black'>
+        {buttonState == 1 ? <Leaderboard/> : ""}
             
         </div>
     </div>
