@@ -1,0 +1,6 @@
+.contributors {
+  display: flex;
+  margin: 30px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
