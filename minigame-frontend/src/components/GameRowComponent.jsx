@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom"
+
 export function GameRowComponent(props) {
     return (
+      <Link to="game">
       <div className="bg-white-400 m-1 py-4 h-[250px] content-center">
         <div className='bg-white-400 h-[100px] content-center flex justify-between flex-row items-center justify-normal content-normal'>
           <div className='bg-[#C7BFBF] h-[100px] flex flex-col justify-start grow p-2'>
@@ -12,5 +15,6 @@ export function GameRowComponent(props) {
           <div className='bg-[#C7BFBF] h-[100px] w-[50px] flex-'></div>
         </div>
       </div>
+      </Link>
     );
   }
