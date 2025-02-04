@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Prevent scroll showing when login modal is open and layout intent issue */
+html {
+  overflow-y: hidden;
+}
