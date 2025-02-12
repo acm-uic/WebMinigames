@@ -34,7 +34,7 @@ const UserControllers = {
         data: newUser,
       });
     } catch (error) {
-      res.status(403).send({
+      res.status(409).send({
         message: error.message,
         success: true,
         data: null,
