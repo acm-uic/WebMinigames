@@ -19,7 +19,7 @@ export default function App() {
           <Route index element={<Homepage />} />
           <Route path="all-games" element={<AllGames />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="game" element={<GamePage/>} />
+          <Route path="game" element={<GamePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
