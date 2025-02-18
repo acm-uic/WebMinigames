@@ -4,11 +4,11 @@ const LikedGames = ({games}) => {
     if (!games) {
         /* Example data if no games are provided */
         games = [
-            {name: "Game 1", link: "/game"}, 
-            {name: "Game 2", link: "/game"}, 
-            {name: "Game 3", link: "/game"}, 
-            {name: "Game 4", link: "/game"},
-            {name: "Game 5", link: "/game"}
+            {name: "Hotline Miami", link: "/game"}, 
+            {name: "Ori and the Blind Forest", link: "/game"}, 
+            {name: "Little Nightmares", link: "/game"}, 
+            {name: "Metal Gear Solid 3: Snake Eater", link: "/game"},
+            {name: "Minecraft", link: "/game"}
         ];
     }
     
