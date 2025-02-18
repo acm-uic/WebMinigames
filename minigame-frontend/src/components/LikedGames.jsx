@@ -17,11 +17,11 @@ const LikedGames = ({games}) => {
             <h1 className="mb-4">Liked Games</h1>
             <ul className="w-full flex flex-nowrap gap-3 overflow-scroll hide-scrollbar">
                 {games.map(g => (
-                    <Link to={g.link}>
                         <li key={g.name} className="min-w-32 w-32 h-20 bg-zinc-300 p-3 items-center justify-center flex text-center">
-                            {g.name}
+                            <Link to={g.link}>
+                                {g.name}
+                            </Link>
                         </li>
-                    </Link>
                 ))}
             </ul>
         </div>
