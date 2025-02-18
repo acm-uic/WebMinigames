@@ -18,7 +18,6 @@ export function ProfileBioComponent(props) {
             <br></br>
             <p className="description">{bio}</p>
             <br></br>
-            <p>{isSignedIn ? "You are signed in!" : "You are not signed in"}</p>
         </div>
     );
 }
