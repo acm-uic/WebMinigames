@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer utilities {
+    /* Hide scrollbar */
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+    .hide-scrollbar {
+        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;  /* Edge and Internet Explorer */
+    }
+};
 /* Prevent scroll showing when login modal is open and layout intent issue */
 html {
   overflow-y: hidden;
 }
+
