@@ -7,22 +7,26 @@ import AllGames from "./page/AllGames.jsx";
 import Profile from "./page/Profile.jsx";
 import GamePage from "./page/GamePage.jsx";
 
+import {UserContextProvider} from "./domain/UserContext.jsx";
+
 import "./index.css";
 import Contributors from "./page/Contributors.jsx";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="contributors" element={<Contributors />} />
-          <Route index element={<Homepage />} />
-          <Route path="all-games" element={<AllGames />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="game" element={<GamePage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <UserContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="contributors" element={<Contributors />} />
+            <Route index element={<Homepage />} />
+            <Route path="all-games" element={<AllGames />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="game" element={<GamePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </UserContextProvider>
   );
 }
 
