@@ -36,7 +36,41 @@ const UserControllers = {
     } catch (error) {
       res.status(409).send({
         message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  signinUser: async (req, res) => {
+    try {
+      // Get the info from the user
+      const { email, password } = req.body;
+
+      // Check if user exist
+      const crrUser = await UserModel.findOne({
+        email: email,
+      });
+
+      // If does not exist user
+      if (!crrUser)
+        throw new Error("Account does not exist! Please re-enter your email!");
+
+      // Check whether the password is correct or not
+      const comparePassword = bcrypt.compareSync(password, crrUser.password);
+      if (!comparePassword)
+        throw new Error(
+          "Wrong password entered! Please re-enter your password!"
+        );
+
+      res.status(200).send({
+        message: "User signs in successfully",
         success: true,
+        data: crrUser,
+      });
+    } catch (error) {
+      res.status(409).send({
+        message: error.message,
+        success: false,
         data: null,
       });
     }
