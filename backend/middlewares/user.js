@@ -19,6 +19,19 @@ const UserMiddlewares = {
       });
     }
   },
+  signinUser: (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+      if (!email) throw new Error("Please enter email!");
+      if (!password) throw new Error("Please enter password!");
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default UserMiddlewares;
