@@ -19,11 +19,17 @@ const UserMiddlewares = {
       });
     }
   },
+  // A middleware for the signing in user function
   signinUser: (req, res, next) => {
     try {
+      // Get the information from the user
       const { email, password } = req.body;
+
+      // Give an error if missing any information
       if (!email) throw new Error("Please enter email!");
       if (!password) throw new Error("Please enter password!");
+
+      return next();
     } catch (error) {
       res.status(400).send({
         message: error.message,

@@ -11,4 +11,10 @@ UserRoute.post(
   UserControllers.createUser
 );
 
+UserRoute.post(
+  "/signin",
+  UserMiddlewares.signinUser,
+  UserControllers.signinUser
+);
+
 export default UserRoute;
