@@ -2,12 +2,13 @@
     /*border-radius: 15px;*/
     color: white;
     width: 400px;
-    height: 557px;
+    height: 725px;
     background-color: rgb(27, 125, 229);
-    margin: 50px;
-    padding: 50px 40px;
+    /* margin: 50px; */
+    padding: 60px 40px;
     /* font-family: "Lucida Console", "Courier New", monospace; */
     text-align: center;
+    float: left;
 }
 
 .profilePicture {

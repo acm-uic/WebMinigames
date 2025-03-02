@@ -1,0 +1,106 @@
+.details-card {
+    width: 1050px;
+    height: 650px;
+    background-color: rgb(251, 253, 255);
+    margin: 10px 30px;
+    padding: 50px 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    display: inline-block;
+}
+
+.favorites-box {
+    background-color: rgb(175, 182, 182);
+    width: 190px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.favorites-text {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top: 30px;
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rankings-box {
+    background-color: rgb(228, 228, 228);
+    width: 900px;
+    height: 100px;
+    margin: 15px;
+    display: inline-block;
+    text-align: center;
+}
+
+
+.rankings-box-title {
+    font-size: 2em;
+}
+
+.rankings-text {
+    color: black;
+    font-size: 30px;
+    margin: 25px 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+.rankings-bar {
+    border-left: 5px solid black;
+    height: 20px;
+    display: inline-block;
+}
+
+.horizontal-bar {
+    background-color: rgb(39, 226, 255);
+    height: 20px;
+    width: 900px;
+    margin: 20px auto;
+}
+
+.interests-box {
+    background-color: rgb(175, 182, 182);
+    width: 250px;
+    height: 40px;
+    margin: 10px 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.interests-text {
+    color: rgb(0, 0, 0);
+    font-size: 1.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.interests-link {
+    width: 250px;
+    height: 40px;
+    margin: 0px 20px;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+.posts-link {
+    width: 250px;
+    height: 40px;
+    margin: 0px 20px;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+}
+
+.posts-link:hover {
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    text-decoration: underline;
+}
