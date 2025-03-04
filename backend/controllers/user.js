@@ -1,5 +1,11 @@
 import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.local" });
+
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const UserControllers = {
   createUser: async (req, res) => {
@@ -62,10 +68,17 @@ const UserControllers = {
           "Wrong password entered! Please re-enter your password!"
         );
 
+      const user = {
+        _id: crrUser._id,
+        email: crrUser.email,
+      };
+
+      const token = jwt.sign(user, SECRET_KEY, { expiresIn: 60 * 60 });
+
       res.status(200).send({
         message: "User signs in successfully",
         success: true,
-        data: crrUser,
+        data: token,
       });
     } catch (error) {
       res.status(409).send({
