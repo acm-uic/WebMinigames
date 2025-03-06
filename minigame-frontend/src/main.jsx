@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./page/Layout.jsx";
-import { AdrianContributor } from "./contributors/Contributors";
+// import { AdrianContributor } from "./contributors/Contributors";
 import Homepage from "./page/Homepage.jsx";
 import AllGames from "./page/AllGames.jsx";
 import Profile from "./page/Profile.jsx";
