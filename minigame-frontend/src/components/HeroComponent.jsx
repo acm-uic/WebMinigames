@@ -1,7 +1,3 @@
-//Have a banner where it says here's what everyone is playing
-//The name of the game centered within a div with the image as the background
-//Similar to the contributors page for the website
-//But ultimately more similar to the score ranking boxes in FighterZ
 import "./css/Hero.css";
 import { ShowcaseGameCardComponent } from "./ShowcaseGameCardComponent";
 export function HeroComponent(props) {

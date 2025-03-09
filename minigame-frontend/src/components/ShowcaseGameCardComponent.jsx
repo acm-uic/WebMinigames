@@ -1,5 +1,4 @@
 import "./css/ShowcaseGameCard.css";
-import TrentonProfileImg from "../images/TrentonPFP.jpg";
 export function ShowcaseGameCardComponent(props) {
     return (
         <div className="showcase-box">
