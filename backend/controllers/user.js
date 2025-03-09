@@ -29,7 +29,7 @@ const UserControllers = {
         password: hashedPassword,
         avatar,
         bio,
-      });
+      }).select("-password");
 
       res.status(201).send({
         message: "User created successfully",
@@ -127,8 +127,6 @@ const UserControllers = {
         { $set: updatedFields },
         { new: true }
       ).select("-password");
-
-      console.log(updatedProfile);
 
       res.status(200).send({
         message: "Profile updated successfully!",
