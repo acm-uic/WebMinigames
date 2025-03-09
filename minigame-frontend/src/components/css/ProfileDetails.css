@@ -1,11 +1,21 @@
 .details-card {
-    width: 1050px;
-    height: 650px;
+    width: 68%;
+    height: 700px;
     background-color: rgb(251, 253, 255);
     margin: 10px 30px;
     padding: 50px 40px;
     font-family: "Lucida Console", "Courier New", monospace;
     display: inline-block;
+}
+
+.details-box-title {
+    font-size: 2em;
+}
+
+.favorites-container {
+    overflow-y: scroll;
+    max-width: 100%;
+    max-height: 300px;
 }
 
 .favorites-box {
@@ -22,45 +32,19 @@
     font-size: 20px;
     margin-top: 30px;
     text-align: center;
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.rankings-box {
-    background-color: rgb(228, 228, 228);
-    width: 900px;
-    height: 100px;
-    margin: 15px;
-    display: inline-block;
-    text-align: center;
-}
-
-
-.rankings-box-title {
-    font-size: 2em;
-}
-
-.rankings-text {
-    color: black;
-    font-size: 30px;
-    margin: 25px 50px;
-    text-align: center;
-    display: inline-block;
-}
-
-.rankings-bar {
-    border-left: 5px solid black;
-    height: 20px;
-    display: inline-block;
 }
 
 .horizontal-bar {
     background-color: rgb(39, 226, 255);
     height: 20px;
-    width: 900px;
+    width: 90%;
     margin: 20px auto;
+}
+
+.interests-container {
+    overflow-y: scroll;
+    max-width: 100%;
+    max-height: 20%;
 }
 
 .interests-box {
@@ -88,6 +72,7 @@
     text-align: center;
     text-decoration: underline;
     font-weight: bolder;
+    
 }
 
 .posts-link {
@@ -103,4 +88,5 @@
     color: rgb(0, 0, 0);
     font-weight: bolder;
     text-decoration: underline;
+    transform: scale(1.1);
 }

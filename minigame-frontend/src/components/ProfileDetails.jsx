@@ -1,54 +1,47 @@
-//The props should be:
-//an image link for the pfp, the username, the bioText, and isSignedIn
 import "./css/ProfileDetails.css";
 export function ProfileDetails(props) {
     const { user } = props;
+    let favorites = ["Fortnite", "Smash", "DBZ", "Halo", "Pokemon", "Warhammer"]
+    let interests = ["First-Person Shooter", "Action", "Adventure", "JRPG", "RPG"]
+
     return (
         <div>
             <h1 className="interests-link">Interests</h1>
             <h1 className="posts-link">Posts</h1>
             <div className="details-card">
 
-                {/* // Favorites section */}
                 <div>
-                    <h1 className="rankings-box-title">Liked Games</h1>
+                    <h1 className="details-box-title">Liked Games</h1>
                 </div>
                 <br></br>
-                <div>
-                    <div className="favorites-box">
-                        <p className="favorites-text">Game name</p>
-                    </div>
-                    <div className="favorites-box">
-                        <p className="favorites-text">Game name</p>
-                    </div>
-                    <div className="favorites-box">
-                        <p className="favorites-text">Game name</p>
-                    </div>
-                    <div className="favorites-box">
-                        <p className="favorites-text">Game name</p>
-                    </div>
+                <div className="favorites-container">
+                    {
+                        favorites.map((item) => {
+                            return (
+                                <div className="favorites-box">
+                                    <p className="favorites-text">{item}</p>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
+
                 <div className="horizontal-bar"></div>
-                {/* // Rankings section */}
-                <h1 className="rankings-box-title">Interests</h1>
 
-                <div className="interests-box">
-                    <p className="interests-text">First-Person Shooter</p>
-                </div>
-                <div className="interests-box">
-                    <p className="interests-text">Action</p>
-                </div>
-                <div className="interests-box">
-                    <p className="interests-text">Adventure</p>
-                </div>
-                <div className="interests-box">
-                    <p className="interests-text">JRPG</p>
-                </div>
-                <div className="interests-box">
-                    <p className="interests-text">RPG</p>
+                <h1 className="details-box-title">Interests</h1>
+
+                <div className="interests-container">
+                    {
+                        interests.map((item) => {
+                            return (
+                                <div className="interests-box">
+                                    <p className="interests-text">{item}</p>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
 
-                {/* //Use event listeners to make size more flexible */}
             </div>
         </div>
     );

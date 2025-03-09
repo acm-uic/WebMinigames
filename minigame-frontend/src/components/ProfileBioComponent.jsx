@@ -1,5 +1,3 @@
-//The props should be:
-//an image link for the pfp, the username, the bioText, and isSignedIn
 import "./css/ProfileBio.css";
 export function ProfileBioComponent(props) {
     const { imageLink, user, bio, isSignedIn } = props;
