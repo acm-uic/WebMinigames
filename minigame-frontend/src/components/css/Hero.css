@@ -1,0 +1,27 @@
+.hero-outside-box {
+    background-color: rgb(27, 125, 229);
+    display: inline-block;
+    width: 100%;
+}
+/*---------------------------------------------*/
+.hero-inside-box {
+    margin: 50px;
+    color: white;
+    display: inline-block;
+}
+
+.hero-inside-title {
+    font-size: 3.25em; 
+    font-weight: bolder;
+    margin-left: 20px;
+}
+
+.hero-inside-subtitle {
+    font-size: 2em; 
+    margin-left: 20px;
+}
+
+.image-tag {
+    text-align: center;
+}
+
