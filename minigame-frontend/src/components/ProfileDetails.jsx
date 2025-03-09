@@ -1,8 +1,6 @@
 import "./css/ProfileDetails.css";
 export function ProfileDetails(props) {
-    const { user } = props;
-    let favorites = ["Fortnite", "Smash", "DBZ", "Halo", "Pokemon", "Warhammer"]
-    let interests = ["First-Person Shooter", "Action", "Adventure", "JRPG", "RPG"]
+    const { user, favorites, interests } = props;
 
     return (
         <div>
@@ -48,5 +46,7 @@ export function ProfileDetails(props) {
 }
 
 ProfileDetails.defaultProps = {
+    favorites: ["Game name", "Game name", "Game name", "Game name"],
+    interests: ["First-Person Shooter", "Action", "Adventure", "RPG"],
     user: "username12345"
 }
