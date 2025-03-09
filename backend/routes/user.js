@@ -18,4 +18,10 @@ UserRoute.post(
   UserControllers.signinUser
 );
 
+UserRoute.put(
+  "/updateProfile",
+  AuthMiddlewares.validateToken,
+  UserControllers.updateProfile
+);
+
 export default UserRoute;
