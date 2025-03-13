@@ -7,7 +7,7 @@ const UserControllers = {
   createUser: async (req, res) => {
     try {
       // Get the info from the user
-      const { userName, email, password, avatar } = req.body;
+      const { userName, email, password, avatar, bio } = req.body;
 
       // Check if there's any email alr existed
       const existedUser = await UserModel.findOne({
@@ -28,7 +28,8 @@ const UserControllers = {
         email,
         password: hashedPassword,
         avatar,
-      });
+        bio,
+      }).select("-password");
 
       res.status(201).send({
         message: "User created successfully",
@@ -78,6 +79,62 @@ const UserControllers = {
       });
     } catch (error) {
       res.status(409).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  updateProfile: async (req, res) => {
+    try {
+      const { user } = req;
+      const { userName, email, password, avatar, bio } = req.body;
+
+      // If the user doesn't update anything
+      if (!(userName || email || password || avatar || bio))
+        throw new Error("Please enter an updated field!");
+      // Get the crrUser
+      const crrUser = await UserModel.findById(user._id);
+
+      const updatedFields = {};
+
+      // Check and update only changed fields
+      if (userName && String(userName) !== String(crrUser.userName)) {
+        updatedFields.userName = userName;
+      }
+      if (email && String(email) !== String(crrUser.email)) {
+        updatedFields.email = email;
+      }
+      if (avatar && String(avatar) !== String(crrUser.avatar)) {
+        updatedFields.avatar = avatar;
+      }
+      if (bio && String(bio) !== String(crrUser.bio)) {
+        updatedFields.bio = bio;
+      }
+      // If the password is new, create a new hashedPassword
+      if (password) {
+        const comparePassword = bcrypt.compareSync(password, crrUser.password);
+        if (!comparePassword) {
+          const saltRounds = 10;
+          const salt = bcrypt.genSaltSync(saltRounds);
+          updatedFields.password = bcrypt.hashSync(password, salt);
+        }
+      }
+
+      // Update the only changed fields
+      const updatedProfile = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $set: updatedFields },
+        { new: true }
+      ).select("-password");
+
+      res.status(200).send({
+        message: "Profile updated successfully!",
+        success: true,
+        data: updatedProfile,
+      });
+    } catch (error) {
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,
