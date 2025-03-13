@@ -1,6 +1,7 @@
 import AdrianProfileImg from "../images/AdrianPFP.png";
 import JackProfileImg from "../images/JackPFP.jpg";
 import ThaiProfileImg from "../images/ThaiPFP.jpg";
+import TrentonProfileImg from "../images/TrentonPFP.jpg";
 import MinhProfileImg from "../images/MinhPFP.jpg";
 export function AdrianContributor() {
   return (
@@ -39,6 +40,15 @@ export function ThaiContributor() {
     </div>
   );
 }
+
+export function TrentonContributor() {
+  return (
+    <div className="contributor-thai flex flex-c bg-slate-500 w-[300px] p-1">
+      <img src={TrentonProfileImg} width={"100px"} />
+      <div className="text-white text-center justify-center m-auto">
+        <div className="font-semibold">Trenton Coleman</div>
+        <div>@tdcoleman127</div>
+
 export function MinhContributor() {
   return (
     <div className="contributor-minh flex flex-c bg-slate-500 w-[300px] p-1">
@@ -50,4 +60,3 @@ export function MinhContributor() {
     </div>
   );
 }
-

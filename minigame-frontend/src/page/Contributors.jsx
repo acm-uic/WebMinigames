@@ -3,6 +3,7 @@ import {
   AdrianContributor,
   JackContributor,
   ThaiContributor,
+  TrentonContributor,
   MinhContributor
 } from "../contributors/Contributors";
 import "./contributors.css";
@@ -13,6 +14,7 @@ export default function Contributors() {
         <AdrianContributor />
         <JackContributor />
         <ThaiContributor />
+        <TrentonContributor />
         <MinhContributor />
       </div>
     </div>
