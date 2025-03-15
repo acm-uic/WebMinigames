@@ -48,6 +48,10 @@ export function TrentonContributor() {
       <div className="text-white text-center justify-center m-auto">
         <div className="font-semibold">Trenton Coleman</div>
         <div>@tdcoleman127</div>
+      </div>
+    </div>
+  );
+}
 
 export function MinhContributor() {
   return (
