@@ -20,7 +20,6 @@ export default function Profile() {
         interests={["First-Person Shooter", "Action", "Adventure", "JRPG", "RPG"]}
         user={"LaserGhost99"}
       />
-
     </div>
   )
 }

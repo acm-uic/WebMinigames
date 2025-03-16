@@ -1,0 +1,103 @@
+.comment-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.comment-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.comment-card {
+    background-color: #f3f4f6;
+    padding: 1.5rem;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.comment-body {
+    padding: 1rem 0;
+}
+
+.profile-picture {
+    width: 3rem;
+    height: 3rem;
+    background-color: #d1d5db;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 1.5rem;
+    font-weight: 600;
+    max-width: 200px;
+    margin-left: 2rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+
+.edit-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+    white-space: nowrap;
+    margin-left: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.report-link {
+    color: #6b7280;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.report-link:hover {
+    color: #1f2937;
+}
+
+.comment-text {
+    margin-bottom: 1rem;
+    color: #1f2937;
+}
+
+.interaction-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.interaction-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #1f2937;
+    cursor: pointer;
+}
+
+.interaction-button.active {
+  color: #1f2937;
+}
+
+.interaction-button.active svg {
+  fill: currentColor;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.space {
+    padding: 1rem;
+}

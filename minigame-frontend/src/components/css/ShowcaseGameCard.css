@@ -1,0 +1,28 @@
+.showcase-box {
+    background-color: rgb(231, 227, 227);
+    margin: 20px;
+    float: right;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 2px #ccc;
+    width: 275px;
+    height: 350px;
+    padding: 10px;
+    border-radius: 10%;
+    word-wrap: break-word;
+}
+
+.showcase-box:hover {
+    transform: scale(1.05);
+}
+
+.showcase-image {
+    width: 225px;
+    height: 150px;
+    margin-top: -11px;
+    margin-left: 15px;
+    text-align: center;
+}
+
+.showcase-text {
+    text-align: center;
+}
