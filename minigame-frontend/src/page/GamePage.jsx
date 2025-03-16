@@ -16,34 +16,34 @@ export default function GamePage() {
     //console.log(buttonState); //debug that prints the comments section state
   }
   return (
-		<div>
-			<div className="w-full bg-white-500 h-[700px] border-y-2 border-black relative flex flex-col justify-center">
-				<div className="text-center text-[36px] absolute w-full top-[0px]">
-					(placeholder game name)
-				</div>
-				<div className="w-[900px] bg-gray-300 h-[550px] content-center m-auto"></div>
-			</div>
-			<div className="w-full bg-[#DAE7FD] h-[50px] flex flex-row justify-center">
-				<div
-					onClick={() => handleCommentsMenu(0)}
-					className={`text-center text-[24px] content-center m-auto ${
-						buttonState == 0 ? "font-bold underline" : "cursor-pointer"
-					}`}
-				>
-					Comments
-				</div>
-				<div
-					onClick={() => handleCommentsMenu(1)}
-					className={`text-center text-[24px] content-center m-auto ${
-						buttonState == 0 ? "cursor-pointer" : "font-bold underline"
-					}`}
-				>
-					Leaderboard
-				</div>
-			</div>
-			<div className="w-full bg-[#DAE7FD] min-h-[525px] max-h-screen border border-black overflow-y-auto">
-				{buttonState == 1 ? <Leaderboard /> : <CommentSection />}
-			</div>
-		</div>
-	);
+    <div>
+      <div className="w-full bg-white-500 h-[700px] border-y-2 border-black relative flex flex-col justify-center">
+        <div className="text-center text-[36px] absolute w-full top-[0px]">
+          (placeholder game name)
+        </div>
+        <div className="w-[900px] bg-gray-300 h-[550px] content-center m-auto"></div>
+      </div>
+      <div className="w-full bg-[#DAE7FD] h-[50px] flex flex-row justify-center">
+        <div
+          onClick={() => handleCommentsMenu(0)}
+          className={`text-center text-[24px] content-center m-auto ${
+            buttonState == 0 ? "font-bold underline" : "cursor-pointer"
+          }`}
+        >
+          Comments
+        </div>
+        <div
+          onClick={() => handleCommentsMenu(1)}
+          className={`text-center text-[24px] content-center m-auto ${
+            buttonState == 0 ? "cursor-pointer" : "font-bold underline"
+          }`}
+        >
+          Leaderboard
+        </div>
+      </div>
+      <div className="w-full bg-[#DAE7FD] min-h-[525px] max-h-screen border border-black overflow-y-auto hide-scrollbar">
+        {buttonState == 1 ? <Leaderboard /> : <CommentSection />}
+      </div>
+    </div>
+  );
 }

@@ -81,12 +81,16 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    color: #6b7280;
+    color: #1f2937;
     cursor: pointer;
 }
 
-.interaction-button:hover {
-    color: #1f2937;
+.interaction-button.active {
+  color: #1f2937;
+}
+
+.interaction-button.active svg {
+  fill: currentColor;
 }
 
 .icon {
