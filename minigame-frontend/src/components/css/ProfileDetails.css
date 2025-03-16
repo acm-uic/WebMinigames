@@ -1,0 +1,92 @@
+.details-card {
+    width: 68%;
+    height: 700px;
+    background-color: rgb(251, 253, 255);
+    margin: 10px 30px;
+    padding: 50px 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    display: inline-block;
+}
+
+.details-box-title {
+    font-size: 2em;
+}
+
+.favorites-container {
+    overflow-y: scroll;
+    max-width: 100%;
+    max-height: 300px;
+}
+
+.favorites-box {
+    background-color: rgb(175, 182, 182);
+    width: 190px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.favorites-text {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.horizontal-bar {
+    background-color: rgb(39, 226, 255);
+    height: 20px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.interests-container {
+    overflow-y: scroll;
+    max-width: 100%;
+    max-height: 20%;
+}
+
+.interests-box {
+    background-color: rgb(175, 182, 182);
+    width: 250px;
+    height: 40px;
+    margin: 10px 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.interests-text {
+    color: rgb(0, 0, 0);
+    font-size: 1.25em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.interests-link {
+    width: 250px;
+    height: 40px;
+    margin: 0px 20px;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bolder;
+    
+}
+
+.posts-link {
+    width: 250px;
+    height: 40px;
+    margin: 0px 20px;
+    font-size: 2em;
+    display: inline-block;
+    text-align: center;
+}
+
+.posts-link:hover {
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    text-decoration: underline;
+    transform: scale(1.1);
+}

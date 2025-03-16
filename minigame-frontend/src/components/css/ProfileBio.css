@@ -1,13 +1,11 @@
 .user-card {
-    /*border-radius: 15px;*/
     color: white;
     width: 400px;
-    height: 557px;
+    height: 100%;
     background-color: rgb(27, 125, 229);
-    margin: 50px;
-    padding: 50px 40px;
-    /* font-family: "Lucida Console", "Courier New", monospace; */
+    padding: 60px 40px;
     text-align: center;
+    float: left;
 }
 
 .profilePicture {
@@ -22,9 +20,6 @@
     font-size: 2.25em;
     font-weight: bolder;
     display: inline;
-    /* margin-left: 50px; */
-    /* background-color: aquamarine; */
-    /* Consider how to add cutting off ellipsis for username */
     overflow-x: hidden;
     text-overflow: ellipsis;  
     
@@ -34,18 +29,13 @@
     font-size: 1.5em;
 }
 
-/* Button for editing */
 .editButton {
-    /* How to fix position in relation to username */
-    /* Still looks somewhat jostled and uneven, but works */
     height: 50px;
     width: 50px;
     margin-left: 300px;
     margin-top: -50px;
-    /* background-color: aquamarine; */
 }
 
-/* Added button hover and press effect */
 .editButton:hover {
     background-color: blue;
     scale: 1.1;
@@ -56,12 +46,8 @@
     transform: scale(0.8);
 }
 
-/* Customized description to make words fit within box */
 .description {
     font-size: 85%;
-    /* background-color: aquamarine; */
-    /* overflow-x: auto; */
-    /* white-space: nowrap; */
     margin: 0px -10px;
     padding: 10px 0;
     word-wrap: break-word;
