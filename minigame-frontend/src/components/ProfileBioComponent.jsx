@@ -4,7 +4,7 @@ export function ProfileBioComponent(props) {
     return (
         <div className="user-card">
             <div>
-                {isSignedIn ? <button class="button"><img className="editButton"
+                {isSignedIn ? <button className="button"><img className="editButton"
                     src="https://cdn-icons-png.flaticon.com/512/4226/4226577.png"
                     alt="Edit icon" /></button> : ""}
             </div>
