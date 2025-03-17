@@ -1,14 +1,21 @@
 import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { SECRET_KEY } from "../index.js";
+import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
+import multer from "multer";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config(CLOUDINARY_CONFIG);
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 const UserControllers = {
   createUser: async (req, res) => {
     try {
       // Get the info from the user
-      const { userName, email, password, avatar, bio } = req.body;
-
+      const { userName, email, password, bio } = req.body;
+      const avatar = req.file;
       // Check if there's any email alr existed
       const existedUser = await UserModel.findOne({
         email: email,
