@@ -24,15 +24,40 @@ const UserControllers = {
       const saltRounds = 10;
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-
-      //   Create a new user
-      const newUser = await UserModel.create({
+      // Create a payload for creating newUser
+      const userPayload = {
         userName,
         email,
         password: hashedPassword,
-        avatar,
         bio,
-      }).select("-password");
+      };
+      // Only add avatar if the user upload avatar file
+      if (avatar) {
+        const dataUrl = `data:${
+          avatar.mimetype
+        };base64,${avatar.buffer.toString("base64")}`;
+        const fileName = avatar.originalname.split(".")[0];
+        await cloudinary.uploader.upload(
+          dataUrl,
+          {
+            public_id: fileName,
+            resource_type: "auto",
+          },
+          (err, result) => {
+            if (err) {
+              // Handle cloudinary upload error
+              console.error("Cloudinary upload error:", err);
+              throw new Error("Failed to upload avatar!");
+            }
+            userPayload.avatar = result.secure_url;
+          }
+        );
+      }
+
+      //   Create a new user
+      const newUser = await UserModel.create(userPayload);
+      // Hide the password when displaying
+      newUser.password = undefined;
 
       res.status(201).send({
         message: "User created successfully",

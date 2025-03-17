@@ -6,7 +6,7 @@ const UserMiddlewares = {
       const { userName, email, password } = req.body;
 
       // Give an error if missing any information
-      if (!userName) throw new Error("Please enter username!");
+      if (!userName) throw new Error("Please enter userName!");
       if (!email) throw new Error("Please enter email!");
       if (!password) throw new Error("Please enter password!");
 

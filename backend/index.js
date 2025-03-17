@@ -10,7 +10,8 @@ await mongoose.connect(MONGODB);
 const app = express();
 const server = http.createServer(app);
 
-app.use(express.json());
+app.use(express.json()); // Only used for JSON payloads (not needed for form-data)
+app.use(express.urlencoded({ extended: true })); // Same, for urlencoded only
 app.use(cors());
 
 app.use("", RootRouteV1);
