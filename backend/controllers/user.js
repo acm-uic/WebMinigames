@@ -2,13 +2,9 @@ import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
-import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config(CLOUDINARY_CONFIG);
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 const UserControllers = {
   createUser: async (req, res) => {
