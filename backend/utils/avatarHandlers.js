@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from "cloudinary";
-
+// Take 2 parameters: the avatar(file) and the object it would be in
 const handleAvatarUpload = async (avatar, object) => {
   try {
     const dataUrl = `data:${avatar.mimetype};base64,${avatar.buffer.toString(
