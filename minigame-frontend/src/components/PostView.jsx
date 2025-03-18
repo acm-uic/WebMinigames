@@ -24,7 +24,7 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
                 </div>
             )
         else
-            return <img className="size-full bg-zinc-400" src={imgs} />
+            return <img className="min-w-[200px] bg-zinc-400" src={imgs} />
     }
    
     return (
