@@ -40,12 +40,6 @@ export default function PostViewPage() {
 
   const MAX_DURATION = 240; // Max duration of a video that is added to our post
   const maxLength = 225; // Max length of our section title
-  const games = {
-    "Black Ops": { categories: ["Action", "PvP"] },
-    "Black Desert": { categories: ["MMORPG", "Open World"] },
-    Battlefield: { categories: ["FPS", "War"] },
-    Battlefront: { categories: ["Shooter", "Star Wars"] },
-  };
 
   const extendedGames = useMemo(() => {
     // Create a copy of the original games object
