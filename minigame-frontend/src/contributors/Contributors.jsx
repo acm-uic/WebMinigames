@@ -3,6 +3,7 @@ import JackProfileImg from "../images/JackPFP.jpg";
 import ThaiProfileImg from "../images/ThaiPFP.jpg";
 import TrentonProfileImg from "../images/TrentonPFP.jpg";
 import MinhProfileImg from "../images/MinhPFP.jpg";
+import DanielProfileImg from "../images/DanielPFP.jpg";
 export function AdrianContributor() {
   return (
 		<div className="contributor-adrian flex flex-c bg-slate-500 w-[300px] p-1">
@@ -63,4 +64,16 @@ export function MinhContributor() {
       </div>
     </div>
   );
+}
+
+export function DanielContributor() {
+  return (
+		<div className="contributor-daniel flex flex-c bg-slate-500 w-[300px] p-1">
+			<img className="object-cover" src={DanielProfileImg} width={"100px"} />
+			<div className="text-white text-center justify-center m-auto">
+				<div>Daniel Barajas</div>
+				<div>@danbarajas</div>
+			</div>
+		</div>
+	);
 }
