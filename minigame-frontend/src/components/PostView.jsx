@@ -21,6 +21,7 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
                     {/* Next Image Button */}
                     <button className="absolute h-[35px] w-[20px] top-[82.5px] right-0 p-1 bg-zinc-600 font-bold text-white opacity-75"
                         onClick={() => setImgIndex((imgIndex + 1) % imgs.length)}>&gt;</button>
+                    <div className="absolute bottom-0 right-0 pl-1 pr-1 bg-zinc-600 text-white opacity-75">{imgIndex+1}/{imgs.length}</div>
                 </div>
             )
         else if (Array.isArray(imgs))
