@@ -25,11 +25,16 @@ export default function PostViewPage() {
   const [selectedTag, setSelectedTag] = useState(null);
   const [search, setSearch] = useState("");
   const [tagIsSelected, setTagIsSelected] = useState(false);
+
   const [files, setFiles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState(null);
 
+  const games = {
+    "Battle Front 2": { categories: ["Action", "PVP"] },
+    "Modern Warfare": { categories: ["Shooting", "FPS"] },
+  };
   const initialConfig = {
     namespace: "MyEditor",
     onError(error) {
@@ -159,6 +164,7 @@ export default function PostViewPage() {
   const handleFileChange = async (event) => {
     const validFiles = [];
     const newFiles = Array.from(event.target.files);
+
     setFileError("");
 
     for (const file of newFiles) {

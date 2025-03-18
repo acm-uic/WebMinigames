@@ -24,7 +24,7 @@ export default function App() {
             <Route path="all-games" element={<AllGames />} />
             <Route path="profile" element={<Profile />} />
             <Route path="game" element={<GamePage />} />
-            <Route path="michael" element={<PostViewPage />} />
+            <Route path="create-post" element={<PostViewPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
