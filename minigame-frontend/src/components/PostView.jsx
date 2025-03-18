@@ -11,7 +11,7 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
     const displayImgs = () => {
         if (imgs == null)
             return
-        else if (Array.isArray(imgs))
+        else if (Array.isArray(imgs) && imgs.length > 1)
             return (
                 <div className="min-w-[200px] relative">
                     <img className="size-full bg-zinc-400" src={imgs[imgIndex]} />
@@ -23,6 +23,8 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
                         onClick={() => setImgIndex((imgIndex + 1) % imgs.length)}>&gt;</button>
                 </div>
             )
+        else if (Array.isArray(imgs))
+            return <img className="min-w-[200px] bg-zinc-400" src={imgs[0]} />
         else
             return <img className="min-w-[200px] bg-zinc-400" src={imgs} />
     }
