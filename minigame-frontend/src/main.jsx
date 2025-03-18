@@ -7,10 +7,11 @@ import AllGames from "./page/AllGames.jsx";
 import Profile from "./page/Profile.jsx";
 import GamePage from "./page/GamePage.jsx";
 
-import {UserContextProvider} from "./domain/UserContext.jsx";
+import { UserContextProvider } from "./domain/UserContext.jsx";
 
 import "./index.css";
 import Contributors from "./page/Contributors.jsx";
+import PostViewPage from "./page/PostViewPage.jsx";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="all-games" element={<AllGames />} />
             <Route path="profile" element={<Profile />} />
             <Route path="game" element={<GamePage />} />
+            <Route path="michael" element={<PostViewPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
