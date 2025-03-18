@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { SECRET_KEY } from "../index.js";
+import { SECRET_KEY } from "../config.js";
 
 const AuthMiddlewares = {
   validateToken: (req, res, next) => {

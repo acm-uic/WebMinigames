@@ -1,14 +1,18 @@
 import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { SECRET_KEY } from "../index.js";
+import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
+import { v2 as cloudinary } from "cloudinary";
+import { handleAvatarUpload } from "../utils/avatarHandlers.js";
+
+cloudinary.config(CLOUDINARY_CONFIG);
 
 const UserControllers = {
   createUser: async (req, res) => {
     try {
       // Get the info from the user
-      const { userName, email, password, avatar, bio } = req.body;
-
+      const { userName, email, password, bio } = req.body;
+      const avatar = req.file;
       // Check if there's any email alr existed
       const existedUser = await UserModel.findOne({
         email: email,
@@ -21,15 +25,23 @@ const UserControllers = {
       const saltRounds = 10;
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-
-      //   Create a new user
-      const newUser = await UserModel.create({
+      // Create a payload for creating newUser
+      const userPayload = {
         userName,
         email,
         password: hashedPassword,
-        avatar,
         bio,
-      }).select("-password");
+      };
+      // Only add avatar if the user upload avatar file
+      if (avatar) {
+        const response = await handleAvatarUpload(avatar, userPayload);
+        if (!response.success) throw new Error(response.message);
+      }
+
+      //   Create a new user
+      const newUser = await UserModel.create(userPayload);
+      // Hide the password when displaying
+      newUser.password = undefined;
 
       res.status(201).send({
         message: "User created successfully",
@@ -88,11 +100,14 @@ const UserControllers = {
   updateProfile: async (req, res) => {
     try {
       const { user } = req;
-      const { userName, email, password, avatar, bio } = req.body;
+      const { userName, email, bio } = req.body;
+      const avatar = req.file;
 
       // If the user doesn't update anything
-      if (!(userName || email || password || avatar || bio))
+      if (!(userName || email || avatar || bio)) {
         throw new Error("Please enter an updated field!");
+      }
+
       // Get the crrUser
       const crrUser = await UserModel.findById(user._id);
 
@@ -105,22 +120,28 @@ const UserControllers = {
       if (email && String(email) !== String(crrUser.email)) {
         updatedFields.email = email;
       }
-      if (avatar && String(avatar) !== String(crrUser.avatar)) {
-        updatedFields.avatar = avatar;
-      }
       if (bio && String(bio) !== String(crrUser.bio)) {
         updatedFields.bio = bio;
       }
-      // If the password is new, create a new hashedPassword
-      if (password) {
-        const comparePassword = bcrypt.compareSync(password, crrUser.password);
-        if (!comparePassword) {
-          const saltRounds = 10;
-          const salt = bcrypt.genSaltSync(saltRounds);
-          updatedFields.password = bcrypt.hashSync(password, salt);
+      if (avatar) {
+        // Get the current file "fileName"
+        const currentFileName = crrUser.avatar
+          ? crrUser.avatar.split("/").pop().split(".")[0]
+          : null;
+        // Get the new file "fileName"
+        const newFileName = avatar.originalname.split(".")[0];
+
+        // If the names are different, replace with the new file
+        if (newFileName !== currentFileName) {
+          // Proceed with upload
+          const response = await handleAvatarUpload(avatar, updatedFields);
+          if (!response.success) throw new Error(response.message);
+          // Delete the old avatar from Cloudinary
+          if (currentFileName) {
+            await cloudinary.uploader.destroy(currentFileName);
+          }
         }
       }
-
       // Update the only changed fields
       const updatedProfile = await UserModel.findByIdAndUpdate(
         user._id,
