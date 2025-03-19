@@ -2,19 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
-    /* Hide scrollbar */
-    .hide-scrollbar::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-    .hide-scrollbar {
-        scrollbar-width: none;  /* Firefox */
-        -ms-overflow-style: none;  /* Edge and Internet Explorer */
-    }
-};
+  /* Hide scrollbar */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Edge and Internet Explorer */
+  }
+}
 /* Prevent scroll showing when login modal is open and layout intent issue */
 html {
   overflow-y: hidden;
 }
 
+.editor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.editor-container {
+  height: 100%;
+}
+
+.editor-inner {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.editor-input {
+  height: 100%;
+  overflow-y: auto;
+  padding: 17px;
+}
+.editor-input:focus {
+  outline: none;
+}
