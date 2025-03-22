@@ -26,15 +26,38 @@ export default function PostViewPage() {
   const [search, setSearch] = useState("");
   const [tagIsSelected, setTagIsSelected] = useState(false);
 
-  const [files, setFiles] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState(null);
+  // const [files, setFiles] = useState([]);
 
+  {
+    /* EXAMPLE CODE FOR GAMES TO ADD TAGS AND FILES FOR MEDIA */
+  }
+  {
+    /*------------------------------------------------------------------------------ */
+  }
   const games = {
     "Battle Front 2": { categories: ["Action", "PVP"] },
     "Modern Warfare": { categories: ["Shooting", "FPS"] },
+    "GTA 5": { categories: ["Action", "Free Roam"] },
   };
+  const exampleFile1 = {
+    file: { type: "image/" },
+    previewUrl:
+      "https://media.contentapi.ea.com/content/dam/walrus/en-gb/migrated-images/2017/04/reveal-swbf2-fb-meta-image-alt.png.adapt.crop191x100.1200w.png", // Example placeholder image URL
+  };
+  const exampleFile2 = {
+    file: { type: "video/mp4" },
+    previewUrl:
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  };
+
+  const [files, setFiles] = useState([exampleFile1, exampleFile2]);
+  {
+    /*------------------------------------------------------------------------------ */
+  }
+
   const initialConfig = {
     namespace: "MyEditor",
     onError(error) {
@@ -108,7 +131,7 @@ export default function PostViewPage() {
 
   const handlePost = () => {
     if (selectedTags.length === 0) {
-      setTagError("You need to add at least one tag.");
+      setTagError("You need to add at least one tag");
     } else {
       setTagError("");
     }
