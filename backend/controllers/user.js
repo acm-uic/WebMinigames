@@ -83,12 +83,29 @@ const UserControllers = {
         email: crrUser.email,
       };
 
-      const token = generateToken(user, "AT");
+      const accessToken = generateToken(
+        {
+          ...user,
+          typeToken: "AT",
+        },
+        "AT"
+      );
+
+      const refreshToken = generateToken(
+        {
+          ...user,
+          typeToken: "RT",
+        },
+        "RT"
+      );
 
       res.status(200).send({
         message: "User signs in successfully",
         success: true,
-        data: token,
+        data: {
+          accessToken,
+          refreshToken,
+        },
       });
     } catch (error) {
       res.status(409).send({
