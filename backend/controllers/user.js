@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
 import { v2 as cloudinary } from "cloudinary";
 import { handleAvatarUpload } from "../utils/avatarHandlers.js";
+import { generateToken } from "../../../../../MindX/Khoa_3/social/social-app/utils/token.js";
 
 cloudinary.config(CLOUDINARY_CONFIG);
 
@@ -82,7 +83,7 @@ const UserControllers = {
         email: crrUser.email,
       };
 
-      const token = jwt.sign(user, SECRET_KEY, { expiresIn: 60 * 60 });
+      const token = generateToken(user, "AT");
 
       res.status(200).send({
         message: "User signs in successfully",
