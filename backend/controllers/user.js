@@ -1,9 +1,8 @@
 import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
+import { CLOUDINARY_CONFIG } from "../config.js";
 import { v2 as cloudinary } from "cloudinary";
-import { handleAvatarUpload } from "../utils/avatarHandlers.js";
+import { handleFileUpload } from "../utils/upload.js";
 import { generateToken } from "../utils/token.js";
 
 cloudinary.config(CLOUDINARY_CONFIG);
@@ -35,8 +34,9 @@ const UserControllers = {
       };
       // Only add avatar if the user upload avatar file
       if (avatar) {
-        const response = await handleAvatarUpload(avatar, userPayload);
+        const response = await handleFileUpload(avatar);
         if (!response.success) throw new Error(response.message);
+        userPayload.avatar = response.data;
       }
 
       //   Create a new user
@@ -152,8 +152,9 @@ const UserControllers = {
         // If the names are different, replace with the new file
         if (newFileName !== currentFileName) {
           // Proceed with upload
-          const response = await handleAvatarUpload(avatar, updatedFields);
+          const response = await handleFileUpload(avatar);
           if (!response.success) throw new Error(response.message);
+          updatedFields.avatar = response.data;
           // Delete the old avatar from Cloudinary
           if (currentFileName) {
             await cloudinary.uploader.destroy(currentFileName);
