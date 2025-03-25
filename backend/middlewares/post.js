@@ -18,3 +18,5 @@ const PostMiddlewares = {
     }
   },
 };
+
+export default PostMiddlewares;

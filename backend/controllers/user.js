@@ -121,11 +121,6 @@ const UserControllers = {
       const { userName, email, bio } = req.body;
       const avatar = req.file;
 
-      // If the user doesn't update anything
-      if (!(userName || email || avatar || bio)) {
-        throw new Error("Please enter an updated field!");
-      }
-
       // Get the crrUser
       const crrUser = await UserModel.findById(user._id);
 

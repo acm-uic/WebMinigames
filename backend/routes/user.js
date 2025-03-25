@@ -24,6 +24,7 @@ UserRoute.put(
   "/updateProfile",
   upload.single("avatar"),
   AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.updateProfile,
   UserControllers.updateProfile
 );
 
