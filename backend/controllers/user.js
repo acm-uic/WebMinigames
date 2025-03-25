@@ -81,6 +81,7 @@ const UserControllers = {
       const user = {
         _id: crrUser._id,
         email: crrUser.email,
+        userName: crrUser.userName,
       };
 
       const accessToken = generateToken(

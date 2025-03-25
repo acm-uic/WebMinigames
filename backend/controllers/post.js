@@ -27,7 +27,10 @@ const PostControllers = {
       res.status(201).send({
         message: "Post created successfully",
         success: true,
-        data: createPost,
+        data: {
+          ...createPost.toObject(),
+          userName: user.userName,
+        },
       });
     } catch (error) {
       res.status(403).send({
