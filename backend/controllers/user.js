@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
 import { v2 as cloudinary } from "cloudinary";
 import { handleAvatarUpload } from "../utils/avatarHandlers.js";
-import { generateToken } from "../../../../../MindX/Khoa_3/social/social-app/utils/token.js";
+import { generateToken } from "../utils/token.js";
 
 cloudinary.config(CLOUDINARY_CONFIG);
 
