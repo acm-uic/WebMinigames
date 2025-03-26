@@ -1,23 +1,29 @@
 import mongoose from "mongoose";
 import Collections from "../database/collections.js";
 
-const PostSchema = mongoose.Schema(
+const CommentSchema = mongoose.Schema(
   {
     author: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: Collections.users,
     },
-    title: {
-      type: String,
+    postId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: Collections.posts,
     },
     body: {
       type: String,
       required: true,
     },
-    images: {
-      type: [String],
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    dislikes: {
+      type: Number,
+      default: 0,
     },
     isDelete: {
       type: Boolean,
@@ -29,5 +35,5 @@ const PostSchema = mongoose.Schema(
   }
 );
 
-const PostModel = mongoose.model(Collections.posts, PostSchema);
-export default PostModel;
+const CommentModel = mongoose.model(Collections.comments, CommentSchema);
+export default CommentModel;
