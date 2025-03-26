@@ -17,7 +17,7 @@ const PostControllers = {
         listMedia.push(response.data);
       }
 
-      const createPost = await PostModel.create({
+      const newPost = await PostModel.create({
         author: user._id,
         title,
         body,
@@ -28,12 +28,12 @@ const PostControllers = {
         message: "Post created successfully",
         success: true,
         data: {
-          ...createPost.toObject(),
+          ...newPost.toObject(),
           userName: user.userName,
         },
       });
     } catch (error) {
-      res.status(403).send({
+      res.status(500).send({
         message: error.message,
         success: false,
         data: null,

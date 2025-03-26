@@ -9,7 +9,7 @@ const PostMiddlewares = {
 
       return next();
     } catch (error) {
-      res.status(403).send({
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,

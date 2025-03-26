@@ -109,7 +109,7 @@ const UserControllers = {
         },
       });
     } catch (error) {
-      res.status(409).send({
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,
@@ -170,7 +170,7 @@ const UserControllers = {
         data: updatedProfile,
       });
     } catch (error) {
-      res.status(400).send({
+      res.status(500).send({
         message: error.message,
         success: false,
         data: null,
