@@ -1,9 +1,9 @@
 import UserModel from "../models/user.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { SECRET_KEY, CLOUDINARY_CONFIG } from "../config.js";
+import { CLOUDINARY_CONFIG } from "../config.js";
 import { v2 as cloudinary } from "cloudinary";
-import { handleAvatarUpload } from "../utils/avatarHandlers.js";
+import { handleFileUpload } from "../utils/upload.js";
+import { generateToken } from "../utils/token.js";
 
 cloudinary.config(CLOUDINARY_CONFIG);
 
@@ -34,8 +34,9 @@ const UserControllers = {
       };
       // Only add avatar if the user upload avatar file
       if (avatar) {
-        const response = await handleAvatarUpload(avatar, userPayload);
+        const response = await handleFileUpload(avatar);
         if (!response.success) throw new Error(response.message);
+        userPayload.avatar = response.data;
       }
 
       //   Create a new user
@@ -80,17 +81,35 @@ const UserControllers = {
       const user = {
         _id: crrUser._id,
         email: crrUser.email,
+        userName: crrUser.userName,
       };
 
-      const token = jwt.sign(user, SECRET_KEY, { expiresIn: 60 * 60 });
+      const accessToken = generateToken(
+        {
+          ...user,
+          typeToken: "AT",
+        },
+        "AT"
+      );
+
+      const refreshToken = generateToken(
+        {
+          ...user,
+          typeToken: "RT",
+        },
+        "RT"
+      );
 
       res.status(200).send({
         message: "User signs in successfully",
         success: true,
-        data: token,
+        data: {
+          accessToken,
+          refreshToken,
+        },
       });
     } catch (error) {
-      res.status(409).send({
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,
@@ -102,11 +121,6 @@ const UserControllers = {
       const { user } = req;
       const { userName, email, bio } = req.body;
       const avatar = req.file;
-
-      // If the user doesn't update anything
-      if (!(userName || email || avatar || bio)) {
-        throw new Error("Please enter an updated field!");
-      }
 
       // Get the crrUser
       const crrUser = await UserModel.findById(user._id);
@@ -134,8 +148,9 @@ const UserControllers = {
         // If the names are different, replace with the new file
         if (newFileName !== currentFileName) {
           // Proceed with upload
-          const response = await handleAvatarUpload(avatar, updatedFields);
+          const response = await handleFileUpload(avatar);
           if (!response.success) throw new Error(response.message);
+          updatedFields.avatar = response.data;
           // Delete the old avatar from Cloudinary
           if (currentFileName) {
             await cloudinary.uploader.destroy(currentFileName);
@@ -155,7 +170,7 @@ const UserControllers = {
         data: updatedProfile,
       });
     } catch (error) {
-      res.status(400).send({
+      res.status(500).send({
         message: error.message,
         success: false,
         data: null,

@@ -1,31 +1,31 @@
 import { v2 as cloudinary } from "cloudinary";
-// Take 2 parameters: the avatar(file) and the object it would be in
-const handleAvatarUpload = async (avatar, object) => {
+
+const handleFileUpload = async (file) => {
   try {
-    const dataUrl = `data:${avatar.mimetype};base64,${avatar.buffer.toString(
+    const dataUrl = `data:${file.mimetype};base64,${file.buffer.toString(
       "base64"
     )}`;
-    const fileName = avatar.originalname.split(".")[0];
+    const fileName = file.originalname.split(".")[0];
+    let data;
     await cloudinary.uploader.upload(
       dataUrl,
       {
         public_id: fileName,
-        folder: "users/avatar",
         resource_type: "auto",
       },
       (err, result) => {
         if (err) {
           // Handle cloudinary upload error
           console.error("Cloudinary upload error:", err);
-          throw new Error("Failed to upload avatar!");
+          throw new Error("Failed to upload file!");
         }
-        object.avatar = result.secure_url;
+        data = result.secure_url;
       }
     );
-    return { success: true };
+    return { data: data, success: true };
   } catch (error) {
     return { success: false, message: error.message, data: null };
   }
 };
 
-export { handleAvatarUpload };
+export { handleFileUpload };

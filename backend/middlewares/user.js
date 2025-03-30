@@ -38,6 +38,25 @@ const UserMiddlewares = {
       });
     }
   },
+  updateProfile: (req, res, next) => {
+    try {
+      const { userName, email, bio } = req.body;
+      const avatar = req.file;
+
+      // If the user doesn't update anything
+      if (!(userName || email || avatar || bio)) {
+        throw new Error("Please enter an updated field!");
+      }
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default UserMiddlewares;
