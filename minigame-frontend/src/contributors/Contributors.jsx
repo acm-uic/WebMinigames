@@ -4,30 +4,31 @@ import ThaiProfileImg from "../images/ThaiPFP.jpg";
 import TrentonProfileImg from "../images/TrentonPFP.jpg";
 import MinhProfileImg from "../images/MinhPFP.jpg";
 import DanielProfileImg from "../images/DanielPFP.jpg";
+import MichaelProfileImg from "../images/MichaelPFP.jpeg";
 export function AdrianContributor() {
   return (
-		<div className="contributor-adrian flex flex-c bg-slate-500 w-[300px] p-1">
-			<img className="object-cover" src={AdrianProfileImg} width={"100px"} />
-			<div className="text-white text-center justify-center m-auto">
-				<div>Adrian Knight</div>
-				<div>@Ajknight121</div>
-			</div>
-		</div>
-	);
+    <div className="contributor-adrian flex flex-c bg-slate-500 w-[300px] p-1">
+      <img className="object-cover" src={AdrianProfileImg} width={"100px"} />
+      <div className="text-white text-center justify-center m-auto">
+        <div>Adrian Knight</div>
+        <div>@Ajknight121</div>
+      </div>
+    </div>
+  );
 }
 
 // Add your contributor card component below
 
 export function JackContributor() {
   return (
-		<div className="contributor-jack flex flex-c bg-slate-500 w-[300px] p-1">
-			<img className="object-cover" src={JackProfileImg} width={"100px"} />
-			<div className="text-white text-center justify-center m-auto">
-				<div className="font-semibold">Chao Liu ｜ Jack</div>
-				<div>@JackLiu00331</div>
-			</div>
-		</div>
-	);
+    <div className="contributor-jack flex flex-c bg-slate-500 w-[300px] p-1">
+      <img className="object-cover" src={JackProfileImg} width={"100px"} />
+      <div className="text-white text-center justify-center m-auto">
+        <div className="font-semibold">Chao Liu ｜ Jack</div>
+        <div>@JackLiu00331</div>
+      </div>
+    </div>
+  );
 }
 
 export function ThaiContributor() {
@@ -57,7 +58,12 @@ export function TrentonContributor() {
 export function MinhContributor() {
   return (
     <div className="contributor-minh flex flex-c bg-slate-500 w-[300px] p-1">
-      <img className="object-cover" src={MinhProfileImg} width={"100px"} height={"300px"} />
+      <img
+        className="object-cover"
+        src={MinhProfileImg}
+        width={"100px"}
+        height={"300px"}
+      />
       <div className="text-white text-center justify-center m-auto">
         <div className="font-semibold">Minh Ngo</div>
         <div>@hoangngo-sudo</div>
@@ -68,12 +74,25 @@ export function MinhContributor() {
 
 export function DanielContributor() {
   return (
-		<div className="contributor-daniel flex flex-c bg-slate-500 w-[300px] p-1">
-			<img className="object-cover" src={DanielProfileImg} width={"100px"} />
-			<div className="text-white text-center justify-center m-auto">
-				<div>Daniel Barajas</div>
-				<div>@danbarajas</div>
-			</div>
-		</div>
-	);
+    <div className="contributor-daniel flex flex-c bg-slate-500 w-[300px] p-1">
+      <img className="object-cover" src={DanielProfileImg} width={"100px"} />
+      <div className="text-white text-center justify-center m-auto">
+        <div>Daniel Barajas</div>
+        <div>@danbarajas</div>
+      </div>
+    </div>
+  );
 }
+
+export function MichaelContributor() {
+  return (
+    <div className="flex flex-c bg-slate-500 w-[300px] p-1">
+      <img className="object-cover" src={MichaelProfileImg} width={"100px"} />
+      <div className="text-white text-center justify-center m-auto">
+        <div>Michael Jaimes</div>
+        <div>@mike6612</div>
+      </div>
+    </div>
+  );
+}
+
