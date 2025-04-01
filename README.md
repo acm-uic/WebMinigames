@@ -2,7 +2,7 @@
 
 ## Running the project locally
 In the terminal:
-1. move to the frontend or backend directory/folder with `cd .\directory\`
+- move to the frontend or backend directory/folder with `cd .\directory\`
 1. run `npm install` in frontend or backend directory
 2. run `npm run dev` in the frontend and backend directory
 
