@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import Popup from "./Popup.jsx"
+import ProfilePopup from "./ProfilePopup.jsx"
 
 const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", profile="/profile", body="Nothing here...", imgs }) => {
     const [imgIndex, setImgIndex] = useState(0)
 
-    {/* Format all given images
+    /* Format all given images
         If none are provided, body will take up image space
         If a link or an array of length 1, image will be displayed
-        If an array of more than one image, images will be displayed as a carousel */}
+        If an array of more than one image, images will be displayed as a carousel */
     const displayImgs = () => {
         if (imgs == null)
             return
@@ -34,12 +36,13 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
         <div className="w-1/2 p-6 bg-zinc-200 m-auto flex flex-col gap-10">
             {/* Username and Title Row */}
             <div className="flex gap-7 h-[50px]">
-                <Link to={profile}>
-                    <div className="flex items-center gap-2 text-wrap w-[200px]">
-                        <img className="w-[50px] rounded-full" src={icon} />
-                        {username}
-                    </div>
-                </Link>
+                <Popup className="flex items-center gap-2 text-wrap w-[200px]" 
+                        popupClassName="bg-[#3B85E7] text-white font-semibold" 
+                        PopupInfo={ProfilePopup} 
+                        popupProps={{ bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }} >
+                    <img className="w-[50px] rounded-full" src={icon} />
+                    {username}
+                </Popup>
 
                 <div className="flex items-center">
                     <h1 className="text-[24px]">Example Title</h1>
