@@ -9,10 +9,18 @@ const PostRoute = Router();
 // Create post route
 PostRoute.post(
   "/create",
-  upload.array("files"),
+  upload.array("images"),
   AuthMiddlewares.verifyAccessToken,
   PostMiddlewares.createPost,
   PostControllers.createPost
+);
+
+PostRoute.put(
+  "/updatePost/:postId",
+  upload.array("images"),
+  AuthMiddlewares.verifyAccessToken,
+  PostMiddlewares.updatePost,
+  PostControllers.updatePost
 );
 
 export default PostRoute;
