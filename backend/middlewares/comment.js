@@ -17,6 +17,23 @@ const CommentMiddlewares = {
       });
     }
   },
+  updateComment: (req, res, next) => {
+    try {
+      const { body } = req.body;
+      const { commentId } = req.params;
+
+      if (!commentId) throw new Error("Please enter commentId on the params!");
+      if (!body) throw new Error("Please enter your comment!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default CommentMiddlewares;
