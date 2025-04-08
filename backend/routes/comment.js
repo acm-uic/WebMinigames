@@ -13,4 +13,11 @@ CommentRoute.post(
   CommentControllers.createComment
 );
 
+CommentRoute.put(
+  "/updateComment/:commentId",
+  AuthMiddlewares.verifyAccessToken,
+  CommentMiddlewares.updateComment,
+  CommentControllers.updateComment
+);
+
 export default CommentRoute;
