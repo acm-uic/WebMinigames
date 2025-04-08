@@ -50,6 +50,7 @@ const PostControllers = {
 
       // Get the current post
       const crrPost = await PostModel.findById(postId);
+      if (!crrPost) throw new Error("Cannot find post!");
 
       const authorized = authorizeUser(user._id, crrPost.author);
       if (!authorized.success) throw new Error(authorized.message);

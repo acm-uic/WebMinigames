@@ -1,5 +1,6 @@
 import PostModel from "../models/post.js";
 import CommentModel from "../models/comment.js";
+import { authorizeUser } from "../utils/authorize.js";
 
 const CommentControllers = {
   createComment: async (req, res) => {
@@ -26,6 +27,44 @@ const CommentControllers = {
           ...newComment.toObject(),
           userName: user.userName,
         },
+      });
+    } catch (error) {
+      res.status(404).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  updateComment: async (req, res) => {
+    try {
+      // Get commentId, body, and user transferred from req
+      const { commentId } = req.params;
+      const { body } = req.body;
+      const { user } = req;
+      // Find comment from the commentId
+      const crrComment = await CommentModel.findById(commentId);
+      if (!crrComment) throw new Error("Cannot find comment!");
+
+      const authorized = authorizeUser(user._id, crrComment.author);
+      if (!authorized.success) throw new Error(authorized.message);
+
+      const updatedFields = [];
+
+      if (!body && String(body) !== String(crrComment.body)) {
+        updatedFields.body = body;
+      }
+
+      const updatedComment = await CommentModel.findByIdAndUpdate(
+        commentId,
+        { $set: updatedFields },
+        { new: true }
+      );
+
+      res.status(200).send({
+        message: "Comment updated successfully!",
+        success: true,
+        data: updatedComment,
       });
     } catch (error) {
       res.status(404).send({
