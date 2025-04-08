@@ -45,22 +45,21 @@ const CommentControllers = {
       // Find comment from the commentId
       const crrComment = await CommentModel.findById(commentId);
       if (!crrComment) throw new Error("Cannot find comment!");
-
+      // Authorized user
       const authorized = authorizeUser(user._id, crrComment.author);
       if (!authorized.success) throw new Error(authorized.message);
-
-      const updatedFields = [];
-
+      // Only updated the fields that needs changing
+      const updatedFields = {};
       if (!body && String(body) !== String(crrComment.body)) {
         updatedFields.body = body;
       }
-
+      // Update comment
       const updatedComment = await CommentModel.findByIdAndUpdate(
         commentId,
         { $set: updatedFields },
         { new: true }
       );
-
+      // Return the updatedComment
       res.status(200).send({
         message: "Comment updated successfully!",
         success: true,
