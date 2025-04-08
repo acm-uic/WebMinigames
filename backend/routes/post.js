@@ -11,7 +11,7 @@ PostRoute.post(
   "/create",
   upload.array("files"),
   AuthMiddlewares.verifyAccessToken,
-  PostMiddlewares.createUser,
+  PostMiddlewares.createPost,
   PostControllers.createPost
 );
 

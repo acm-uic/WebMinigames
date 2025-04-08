@@ -1,6 +1,6 @@
 const PostMiddlewares = {
   // A middleware for creating a new post
-  createUser: (req, res, next) => {
+  createPost: (req, res, next) => {
     try {
       const { title, body } = req.body;
       //   Throw error if missing title or body
