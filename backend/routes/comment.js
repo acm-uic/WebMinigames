@@ -7,7 +7,7 @@ const CommentRoute = Router();
 
 // Create comment
 CommentRoute.post(
-  "/create",
+  "/create/:postId",
   AuthMiddlewares.verifyAccessToken,
   CommentMiddlewares.createComment,
   CommentControllers.createComment

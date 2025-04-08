@@ -5,7 +5,8 @@ const CommentControllers = {
   createComment: async (req, res) => {
     try {
       // Get postId, body, and user transferred from req
-      const { postId, body } = req.body;
+      const { postId } = req.params;
+      const { body } = req.body;
       const { user } = req;
       // Find post from postId
       const crrPost = await PostModel.findById(postId);
