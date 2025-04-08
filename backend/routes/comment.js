@@ -7,10 +7,17 @@ const CommentRoute = Router();
 
 // Create comment
 CommentRoute.post(
-  "/create",
+  "/create/:postId",
   AuthMiddlewares.verifyAccessToken,
   CommentMiddlewares.createComment,
   CommentControllers.createComment
+);
+
+CommentRoute.put(
+  "/updateComment/:commentId",
+  AuthMiddlewares.verifyAccessToken,
+  CommentMiddlewares.updateComment,
+  CommentControllers.updateComment
 );
 
 export default CommentRoute;
