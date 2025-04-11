@@ -1,0 +1,62 @@
+import GameModel from "../models/game.js";
+import { handleFileUpload } from "../utils/upload.js";
+
+const GameControllers = {
+  createGame: async (req, res) => {
+    try {
+      // Get info from req
+      const { user } = req;
+      const { gameName, description, relatedLinks } = req.body;
+      const coverImage = req.files?.coverImage?.[0]; // single file
+      const listFile = req.files?.media || []; // array of files
+
+      const existedGame = await GameModel.findOne({
+        gameName: gameName,
+      });
+
+      if (existedGame) {
+        throw new Error("This gameName is used. Please use another name");
+      }
+
+      // Create a game payload
+      const gamePayload = {
+        gameName,
+        description,
+        relatedLinks,
+        author: user._id,
+      };
+      // If user upload media
+      if (coverImage) {
+        const response = await handleFileUpload(coverImage);
+        if (!response.success) throw new Error(response.message);
+        gamePayload.coverImage = response.data;
+      }
+
+      if (listFile) {
+        const listMedia = [];
+        for (const file of listFile) {
+          const response = await handleFileUpload(file);
+          if (!response.success) throw new Error(response.message);
+          listMedia.push(response.data);
+        }
+        gamePayload.media = listMedia;
+      }
+
+      const newGame = await GameModel.create(gamePayload);
+
+      res.status(201).send({
+        message: "Game created successfully",
+        success: true,
+        data: newGame,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+};
+
+export default GameControllers;

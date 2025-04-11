@@ -8,8 +8,10 @@ const GameRoute = Router();
 
 GameRoute.post(
   "/create",
-  upload.single("coverImage"),
-  upload.array("media"),
+  upload.fields([
+    { name: "coverImage", maxCount: 1 },
+    { name: "media", maxCount: 10 },
+  ]),
   AuthMiddlewares.verifyAccessToken,
   AuthMiddlewares.verifyAdmin,
   GameMiddlewares.createGame,
