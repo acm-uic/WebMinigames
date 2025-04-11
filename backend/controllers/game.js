@@ -75,6 +75,27 @@ const GameControllers = {
       });
     }
   },
+  getGameById: async (req, res) => {
+    try {
+      const { gameId } = req.params;
+
+      const crrGame = await GameModel.findById(gameId);
+
+      if (!crrGame) throw new Error("Cannot find game!");
+
+      res.status(200).send({
+        message: "Here is your game",
+        success: true,
+        data: crrGame,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default GameControllers;
