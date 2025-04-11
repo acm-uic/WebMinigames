@@ -75,8 +75,10 @@ const AuthMiddlewares = {
   },
   verifyAdmin: (req, res, next) => {
     try {
+      // Get the user info from req
+      // Assume that user is verified before
       const { user } = req;
-
+      // If user doesn't exist or not an admin
       if (!user || String(user.role) !== "Admin") {
         throw new Error("Not_admin");
       }
