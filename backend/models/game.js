@@ -6,6 +6,7 @@ const GameSchema = mongoose.Schema(
     gameName: {
       type: String,
       required: true,
+      unique: true,
     },
     description: {
       type: String,
