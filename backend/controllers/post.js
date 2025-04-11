@@ -12,10 +12,12 @@ const PostControllers = {
       const listMedia = [];
 
       // If user upload files
-      for (const file of listFile) {
-        const response = await handleFileUpload(file);
-        if (!response.success) throw new Error(response.message);
-        listMedia.push(response.data);
+      if (listFile) {
+        for (const file of listFile) {
+          const response = await handleFileUpload(file);
+          if (!response.success) throw new Error(response.message);
+          listMedia.push(response.data);
+        }
       }
 
       const newPost = await PostModel.create({

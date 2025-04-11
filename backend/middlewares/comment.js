@@ -3,7 +3,8 @@ const CommentMiddlewares = {
   createComment: (req, res, next) => {
     try {
       // Ask for postId and comment body
-      const { postId, body } = req.body;
+      const { postId } = req.params;
+      const { body } = req.body;
       // If lack either, throw an error
       if (!postId) throw new Error("Please enter postId!");
       if (!body) throw new Error("Please enter your comment!");
