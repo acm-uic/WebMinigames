@@ -57,6 +57,24 @@ const GameControllers = {
       });
     }
   },
+  getAllGames: async (req, res) => {
+    try {
+      const listGames = await GameModel.find();
+      if (listGames.length === 0) throw new Error("No games found!");
+
+      res.status(200).send({
+        message: "Here is a list of all the games",
+        success: true,
+        data: listGames,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default GameControllers;
