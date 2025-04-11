@@ -1,0 +1,19 @@
+import { Router } from "express";
+import AuthMiddlewares from "../middlewares/auth.js";
+import GameMiddlewares from "../middlewares/game.js";
+import GameControllers from "../controllers/game.js";
+import upload from "../middlewares/upload.js";
+
+const GameRoute = Router();
+
+GameRoute.post(
+  "/create",
+  upload.single("coverImage"),
+  upload.array("media"),
+  AuthMiddlewares.verifyAccessToken,
+  AuthMiddlewares.verifyAdmin,
+  GameMiddlewares.createGame,
+  GameControllers.createGame
+);
+
+export default GameRoute;

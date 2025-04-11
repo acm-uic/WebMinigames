@@ -3,9 +3,7 @@ const GameMiddlewares = {
     try {
       const { gameName, description } = req.body;
 
-      console.log(req.body);
       if (!gameName) throw new Error("Please enter gameName");
-
       if (!description) throw new Error("Please enter game description");
 
       return next();
