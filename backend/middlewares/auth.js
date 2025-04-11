@@ -73,6 +73,36 @@ const AuthMiddlewares = {
       });
     }
   },
+  verifyAdmin: (req, res, next) => {
+    try {
+      const { user } = req;
+
+      if (!user || String(user.role) !== "Admin") {
+        throw new Error("Not_admin");
+      }
+
+      return next();
+    } catch (error) {
+      let type = "";
+      let getMessage = "";
+      switch (error.message) {
+        case "Not_admin":
+          getMessage = "Admin access required";
+          type = "Forbidden";
+          break;
+        default:
+          getMessage = "Access denied";
+          type = "UNAUTH";
+          break;
+      }
+      res.status(403).send({
+        message: getMessage,
+        type,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default AuthMiddlewares;
