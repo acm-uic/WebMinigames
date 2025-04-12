@@ -35,7 +35,7 @@ const CommentMiddlewares = {
       });
     }
   },
-  getCommentInAPost: (req, res, next) => {
+  getCommentsInAPost: (req, res, next) => {
     try {
       const { postId } = req.params;
 
