@@ -1,22 +1,17 @@
 import { Router } from "express";
-import UserRoute from "./user.js";
-import PostRoute from "./post.js";
-import CommentRoute from "./comment.js";
-import GameRoute from "./game.js";
+import AuthMiddlewares from "../middlewares/auth.js";
+import { PublicRoute } from "./public.js";
+import { PrivateRoute } from "./private.js";
 
 // Create a root route and then branching to diff routes
 const RootRouteV1 = Router();
 
-// User routes
-RootRouteV1.use("/users", UserRoute);
+// Public routes
+RootRouteV1.use("/public", PublicRoute);
 
-// Post route
-RootRouteV1.use("/posts", PostRoute);
+// For every router after this, need to verify user first
+RootRouteV1.use(AuthMiddlewares.verifyAccessToken);
 
-// Comment route
-RootRouteV1.use("/comments", CommentRoute);
-
-// Game route
-RootRouteV1.use("/games", GameRoute);
+RootRouteV1.use("/private", PrivateRoute);
 
 export { RootRouteV1 };
