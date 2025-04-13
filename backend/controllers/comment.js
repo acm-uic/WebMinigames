@@ -73,6 +73,49 @@ const CommentControllers = {
       });
     }
   },
+  getAllComment: async (req, res) => {
+    try {
+      const listComments = await CommentModel.find();
+      if (listComments.length === 0) throw new Error("No comments found!");
+
+      res.status(201).send({
+        message: "Here is a list of comments!",
+        success: true,
+        data: listComments,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  getCommentsInAPost: async (req, res) => {
+    try {
+      const { postId } = req.params;
+
+      const listComments = await CommentModel.find({
+        postId: postId,
+      });
+
+      if (listComments.length === 0) {
+        throw new Error("No comments in this post!");
+      }
+
+      res.status(201).send({
+        message: "Here is a list of comments in this post",
+        success: true,
+        data: listComments,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default CommentControllers;
