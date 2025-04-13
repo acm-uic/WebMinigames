@@ -33,6 +33,26 @@ export const UserContextProvider = ({children}) => {
 
   }
 
+  const loginUser = async (userName = "", email = "", password) => {
+    console.log({userName, email, password})
+    const response = await fetch(`${serverURL}/users/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({email, password})
+      },
+    );
+
+    if (!response.ok) {
+      console.error(response.status);
+      return;
+    }
+
+    console.log("User created successfully");
+  }
+
   return (
     <UserContext.Provider value={{ un: [username, setUsername], 
                                     am: [aboutMe, setAboutMe], 
