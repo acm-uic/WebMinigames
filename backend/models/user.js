@@ -25,6 +25,11 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  role: {
+    type: String,
+    required: true,
+    default: "User",
+  },
 });
 
 // Creating a user model
