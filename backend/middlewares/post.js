@@ -21,7 +21,10 @@ const PostMiddlewares = {
   updatePost: (req, res, next) => {
     try {
       const { title, body } = req.body;
+      const { postId } = req.params;
       const listFile = req.files;
+
+      if (!postId) throw new Error("Please enter postId!");
       // Throw error if the user doesn't update anything
       if (!title && !body && !listFile) {
         throw new Error("Please enter an updated field!");

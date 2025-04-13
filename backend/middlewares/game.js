@@ -16,6 +16,22 @@ const GameMiddlewares = {
       });
     }
   },
+  getGameById: (req, res, next) => {
+    try {
+      const { gameId } = req.params;
+
+      if (!gameId) throw new Error("Please enter gameId!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+        error,
+      });
+    }
+  },
 };
 
 export default GameMiddlewares;
