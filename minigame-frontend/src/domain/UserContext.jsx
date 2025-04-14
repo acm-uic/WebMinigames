@@ -1,4 +1,3 @@
-import React from "react";
 import { createContext, useState } from "react";
 
 
@@ -10,6 +9,7 @@ export const UserContextProvider = ({children}) => {
   const [aboutMe, setAboutMe] = useState("Nothing here yet.");
   const [profileIcon , setProfileIcon] = useState("https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
   const [favoriteGames, setFavoriteGames] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
   const createUser = async (userName, email, password, bio="") => {
@@ -25,17 +25,21 @@ export const UserContextProvider = ({children}) => {
     );
 
     if (!response.ok) {
-      console.error(response.status);
-      return;
+      console.error(response);
+      return false;
     }
 
+    const res = await response.json();
     console.log("User created successfully");
-
+    setIsLoggedIn(true);
+    setUsername(res.data.user.userName);
+    setAboutMe(res.data.user.bio);
+    return true;
   }
 
-  const loginUser = async (userName = "", email = "", password) => {
-    console.log({userName, email, password})
-    const response = await fetch(`${serverURL}/users/create`,
+  const loginUser = async (email = "", password) => {
+    console.log({email, password})
+    const response = await fetch(`${serverURL}/users/signin`,
       {
         method: "POST",
         headers: {
@@ -46,19 +50,21 @@ export const UserContextProvider = ({children}) => {
     );
 
     if (!response.ok) {
-      console.error(response.status);
-      return;
+      console.error(response);
+      return false;
     }
-
-    console.log("User created successfully");
+    const res = await response.json()
+    setIsLoggedIn(true);
+    setUsername(res.data.user.userName);
+    return true
   }
 
   return (
-    <UserContext.Provider value={{ un: [username, setUsername], 
+    <UserContext.Provider value={{ username, 
                                     am: [aboutMe, setAboutMe], 
                                     pi: [profileIcon, setProfileIcon], 
                                     fg: [favoriteGames, setFavoriteGames],
-                                    createUser }}>
+                                    createUser,loginUser, isLoggedIn }}>
       {children}
     </UserContext.Provider>
   )
