@@ -7,10 +7,12 @@ export const UserContextProvider = ({children}) => {
   // Default user values
   const [username, setUsername] = useState("Guest");
   const [aboutMe, setAboutMe] = useState("Nothing here yet.");
+  const [accessToken, setAccessToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("")
   const [profileIcon , setProfileIcon] = useState("https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg");
   const [favoriteGames, setFavoriteGames] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+//"https://i.pinimg.com/736x/c6/25/f6/c625f6315130d8329a95ae27d8e95564.jpg"
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
   const createUser = async (userName, email, password, bio="") => {
     console.log({userName, email, password, bio})
@@ -28,12 +30,13 @@ export const UserContextProvider = ({children}) => {
       console.error(response);
       return false;
     }
-
-    const res = await response.json();
+    // const res = await response.json();
     console.log("User created successfully");
-    setIsLoggedIn(true);
-    setUsername(res.data.user.userName);
-    setAboutMe(res.data.user.bio);
+    await loginUser(email, password);
+    // setIsLoggedIn(true);
+    // setUsername(res.data.user.userName);
+    // setAboutMe(res.data.user.bio);
+
     return true;
   }
 
@@ -56,15 +59,45 @@ export const UserContextProvider = ({children}) => {
     const res = await response.json()
     setIsLoggedIn(true);
     setUsername(res.data.user.userName);
+    setAccessToken(res.data.accessToken);
+    setRefreshToken(res.data.refreshToken);
     return true
+  }
+
+  const updateProfile = async (newName, bio, avatar) => {
+    console.log(accessToken)
+    console.log({userName:newName, email:"", bio:bio});
+    const response = await fetch(`${serverURL}/users/updateProfile`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": accessToken
+        },
+        body: JSON.stringify({userName:newName, email:"", bio:bio}),
+        file: avatar
+      }, 
+    );
+
+    const res = await response.json();
+    if (!response.ok) {
+      console.error(res.message);
+      return false;
+    }
+    console.log(res);
+    console.log("profile updated successfully");
+    setProfileIcon(res.data.avatar);
+    setAboutMe(res.data.bio);
+    setUsername(res.data.userName);
+
   }
 
   return (
     <UserContext.Provider value={{ username, 
-                                    am: [aboutMe, setAboutMe], 
-                                    pi: [profileIcon, setProfileIcon], 
+                                    aboutMe, 
+                                    profileIcon, 
                                     fg: [favoriteGames, setFavoriteGames],
-                                    createUser,loginUser, isLoggedIn }}>
+                                    createUser,loginUser, isLoggedIn, updateProfile }}>
       {children}
     </UserContext.Provider>
   )

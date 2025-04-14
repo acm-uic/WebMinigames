@@ -9,6 +9,9 @@ const AuthMiddlewares = {
       const token = authHeader.split(" ")[1];
 
       // Validate the access token
+      if (!token) {
+        token = authHeader
+      }
       const data = verifyToken(token, "AT");
       req.user = data;
       return next();
