@@ -48,7 +48,7 @@ const UserControllers = {
       res.status(201).send({
         message: "User created successfully",
         success: true,
-        data: newUser,
+        data: {user:newUser},
       });
     } catch (error) {
       res.status(409).send({
@@ -106,6 +106,7 @@ const UserControllers = {
         message: "User signs in successfully",
         success: true,
         data: {
+          user,
           accessToken,
           refreshToken,
         },
