@@ -22,7 +22,10 @@
     display: inline;
     overflow-x: hidden;
     text-overflow: ellipsis;  
-    
+}
+
+.edit {
+    color:black;
 }
 
 .bio {

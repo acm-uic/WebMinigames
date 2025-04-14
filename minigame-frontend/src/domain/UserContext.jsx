@@ -30,12 +30,8 @@ export const UserContextProvider = ({children}) => {
       console.error(response);
       return false;
     }
-    // const res = await response.json();
     console.log("User created successfully");
     await loginUser(email, password);
-    // setIsLoggedIn(true);
-    // setUsername(res.data.user.userName);
-    // setAboutMe(res.data.user.bio);
 
     return true;
   }
@@ -89,7 +85,7 @@ export const UserContextProvider = ({children}) => {
     setProfileIcon(res.data.avatar);
     setAboutMe(res.data.bio);
     setUsername(res.data.userName);
-
+    return true;
   }
 
   return (

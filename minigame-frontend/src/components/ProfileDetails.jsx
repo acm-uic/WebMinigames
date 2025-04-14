@@ -39,8 +39,8 @@ export function ProfileDetails(props) {
   );
 }
 
-ProfileDetails.defaultProps = {
-  favorites: ["Game name", "Game name", "Game name", "Game name"],
-  interests: ["First-Person Shooter", "Action", "Adventure", "RPG"],
-  user: "username12345",
-};
+// ProfileDetails.defaultProps = {
+//   favorites: ["Game name", "Game name", "Game name", "Game name"],
+//   interests: ["First-Person Shooter", "Action", "Adventure", "RPG"],
+//   user: "username12345",
+// };
