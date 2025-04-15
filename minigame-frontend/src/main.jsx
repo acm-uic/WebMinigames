@@ -13,6 +13,7 @@ import { UserContextProvider } from "./domain/UserContext.jsx";
 import "./index.css";
 import Contributors from "./page/Contributors.jsx";
 import GameDetails from "./components/GameDetails.jsx";
+import GameDetailsPopUp from "./components/GameDetailsPopup.jsx";
 
 const exampleGame = {
   cover:
@@ -38,6 +39,11 @@ export default function App() {
               path="game-details"
               element={<GameDetails game={exampleGame} />}
             />
+            <Route
+              path="game-details2"
+              element={<GameDetailsPopUp game={exampleGame} />}
+            />
+
             <Route path="create-post" element={<PostViewPage />} />
           </Route>
         </Routes>
