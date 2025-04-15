@@ -15,7 +15,7 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
             return
         else if (Array.isArray(imgs) && imgs.length > 1) {
             return (
-                <div className="flex items-center bg-[#6763DE] border border-black w-2/5 aspect-square relative"> 
+                <div className="flex items-center bg-[#6763DE] border border-black w-2/5 max-h-[300px] aspect-square relative"> 
                     <img className="size-full object-contain" src={imgs[imgIndex]} />
                     {/* Previous Image Button */}
                     <button className="absolute h-[35px] w-[20px] top-[1/2] p-1 bg-zinc-600 font-bold text-white opacity-75"
