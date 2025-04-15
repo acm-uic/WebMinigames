@@ -15,7 +15,7 @@ const Popup = ({ className, popupClassName, PopupInfo, popupProps, children }) =
     const [isVisible, setIsVisible] = useState(false);
 
     return (
-        <div className="relative"  onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
+        <div className="relative size-fit"  onMouseEnter={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)}>
             {/* Initial Element */}
             <div className={className}>
                 {children}
