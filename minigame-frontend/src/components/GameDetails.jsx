@@ -1,6 +1,6 @@
 export default function GameDetails({ game }) {
   return (
-    <div className="w-40 absolute left-[100px] top-[100px] flex flex-col justify-start items-center">
+    <div className="bg-green-300 w-40 flex flex-col justify-start items-center xl:scale-90 mr-[70%] ">
       <img src={game.cover} alt="Game Cover" className="w-full h-auto" />
 
       <div className="text-xs break-words whitespace-normal w-full h-auto py-1 mt-3 p-2 bg-gray-400">
@@ -36,3 +36,4 @@ export default function GameDetails({ game }) {
     </div>
   );
 }
+
