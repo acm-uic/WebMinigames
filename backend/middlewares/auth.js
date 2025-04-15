@@ -6,14 +6,12 @@ const AuthMiddlewares = {
       const authHeader = req.headers["authorization"];
       if (!authHeader) throw new Error("Please enter token");
       // Split the access token from the bearer token
-      let token = authHeader.split(" ")[1];
+      // Handle both cases: with or without 'Bearer '
+      const token = authHeader.startsWith("Bearer ")
+        ? authHeader.split(" ")[1]
+        : authHeader;
 
       // Validate the access token
-      console.log(authHeader);
-      console.log(token);
-      if (!token) {
-        token = authHeader
-      }
       const data = verifyToken(token, "AT");
       req.user = data;
       return next();
