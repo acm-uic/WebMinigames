@@ -42,15 +42,6 @@ export default function App() {
             <Route path="all-games" element={<AllGames />} />
             <Route path="profile" element={<Profile />} />
             <Route path="game" element={<GamePage />} />
-            <Route
-              path="game-details"
-              element={<GameDetails game={exampleGame} />}
-            />
-            <Route
-              path="game-details2"
-              element={<GameDetailsPopUp game={exampleGame} />}
-            />
-
             <Route path="create-post" element={<PostViewPage />} />
           </Route>
         </Routes>

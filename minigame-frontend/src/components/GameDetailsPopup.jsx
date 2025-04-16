@@ -1,5 +1,7 @@
 import GameDetails from "./GameDetails";
 
+gamoe;
+
 export default function GameDetailsPopUp({ game }) {
   return (
     <div>
@@ -27,22 +29,6 @@ export default function GameDetailsPopUp({ game }) {
               {game.description}
             </div>
           </div>
-
-          {/* <div className=" overflow-y-auto ml-44 h-full flex flex-col w-[70%]">
-            <div className="  bg-green-400  items-center h-[151px] flex whitespace-nowrap ">
-              <div className="  w-full mb-2 overflow-x-auto ">
-                {game.images.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`Game image ${index + 1}`}
-                    className="inline-block h-32 w-auto object-cover scale-90"
-                  />
-                ))}
-              </div>
-            </div>
-            <div className=" p-1 bg-gray-300 flex-1 ">{game.description}</div>
-          </div> */}
         </div>
       </div>
     </div>
