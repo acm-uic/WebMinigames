@@ -1,7 +1,5 @@
 import GameDetails from "./GameDetails";
 
-gamoe;
-
 export default function GameDetailsPopUp({ game }) {
   return (
     <div>
