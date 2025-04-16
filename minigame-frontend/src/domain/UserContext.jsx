@@ -16,7 +16,7 @@ export const UserContextProvider = ({children}) => {
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
   const createUser = async (userName, email, password, bio="") => {
     console.log({userName, email, password, bio})
-    const response = await fetch(`${serverURL}/public/users/create`,
+    const response = await fetch(`${serverURL}/api/public/users/create`,
       {
         method: "POST",
         headers: {
@@ -38,7 +38,7 @@ export const UserContextProvider = ({children}) => {
 
   const loginUser = async (email = "", password) => {
     console.log({email, password})
-    const response = await fetch(`${serverURL}/public/users/signin`,
+    const response = await fetch(`${serverURL}/api/public/users/signin`,
       {
         method: "POST",
         headers: {
@@ -63,7 +63,7 @@ export const UserContextProvider = ({children}) => {
   const updateProfile = async (newName, bio, avatar) => {
     console.log(accessToken)
     console.log({userName:newName, email:"", bio:bio});
-    const response = await fetch(`${serverURL}/private/users/updateProfile`,
+    const response = await fetch(`${serverURL}/api/private/users/updateProfile`,
       {
         method: "PUT",
         headers: {
