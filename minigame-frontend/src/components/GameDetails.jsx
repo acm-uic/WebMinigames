@@ -1,7 +1,7 @@
 export default function GameDetails({ game }) {
   return (
-    <div className=" scale-90 flex flex-col justify-start items-center ">
-      <img src={game.cover} alt="Game Cover" className="w-full h-auto" />
+    <div className=" flex flex-col ">
+      <img src={game.cover} alt="Game Cover" className="w-full h-auto " />
 
       <div className="text-xs break-words whitespace-normal w-full h-auto py-1 mt-3 p-2 bg-gray-400">
         <p className="mb-1">
