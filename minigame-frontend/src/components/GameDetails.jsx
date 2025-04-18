@@ -1,7 +1,7 @@
 export default function GameDetails({ game }) {
   return (
-    <div className="w-40 absolute left-[100px] top-[100px] flex flex-col justify-start items-center">
-      <img src={game.cover} alt="Game Cover" className="w-full h-auto" />
+    <div className=" flex flex-col ">
+      <img src={game.cover} alt="Game Cover" className="w-full h-auto " />
 
       <div className="text-xs break-words whitespace-normal w-full h-auto py-1 mt-3 p-2 bg-gray-400">
         <p className="mb-1">
@@ -15,7 +15,7 @@ export default function GameDetails({ game }) {
         </p>
       </div>
 
-      <div className="w-full h-auto p-2 py-1 mt-3 bg-gray-400">
+      <div className="w-full h-auto p-2 py-1 mt-3 bg-gray-400 ">
         <p className="text-xs mb-1 ">PLAY NOW:</p>
         <ul className="text-xs ">
           {game.links.map((link, index) => (
@@ -36,3 +36,4 @@ export default function GameDetails({ game }) {
     </div>
   );
 }
+
