@@ -40,11 +40,11 @@ const UserMiddlewares = {
   },
   updateProfile: (req, res, next) => {
     try {
-      const { userName, email, bio } = req.body;
+      const { userName, email, bio, role } = req.body;
       const avatar = req.file;
 
       // If the user doesn't update anything
-      if (!(userName || email || avatar || bio)) {
+      if (!(userName || email || avatar || bio || role)) {
         throw new Error("Please enter an updated field!");
       }
 

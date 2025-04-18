@@ -14,7 +14,7 @@ app.use(express.json()); // Only used for JSON payloads (not needed for form-dat
 app.use(express.urlencoded({ extended: true })); // Same, for urlencoded only
 app.use(cors());
 
-app.use("", RootRouteV1);
+app.use("/api", RootRouteV1);
 
 server.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${process.env.PORT}`);

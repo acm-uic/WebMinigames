@@ -12,7 +12,8 @@ import { UserContextProvider } from "./domain/UserContext.jsx";
 import "./index.css";
 import Contributors from "./page/Contributors.jsx";
 import GameDetails from "./components/GameDetails.jsx";
-import GameDetailsPopUp from "./components/GameDetailsPopup.jsx";
+import PostView from "./components/PostView.jsx";
+import PostViewPage from "./page/PostViewPage.jsx";
 
 const exampleGame = {
   name: "Fortnite",
@@ -41,6 +42,11 @@ export default function App() {
             <Route path="all-games" element={<AllGames />} />
             <Route path="profile" element={<Profile />} />
             <Route path="game" element={<GamePage />} />
+            <Route
+              path="game-details"
+              element={<GameDetails game={exampleGame} />}
+            />
+            <Route path="create-post" element={<PostViewPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

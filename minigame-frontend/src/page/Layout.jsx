@@ -1,11 +1,13 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LoginModal from "../components/LoginModal";
+import { UserContext } from "../domain/UserContext";
 
 const Layout = () => {
   // state variables
+  const {isLoggedIn, username} = useContext(UserContext);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   const navigate = useNavigate();
 
   // handle profile click
@@ -36,8 +38,9 @@ const Layout = () => {
           </div>
 
           {/* Right section: Profile icon & Sign in button */}
-          <div className="flex items-center space-x-4">
-            <div className="text-white hover:text-gray-200">
+          <div className="flex flex-row items-center space-x-4 text-white">
+              {isLoggedIn && <div>Hello {username}!</div>}
+            <div className="hover:text-gray-200">
               {/* If user is not logged in, show profile icon */}
               {isLoggedIn ? (
                 <Link to="/profile" className="text-white hover:text-gray-200">

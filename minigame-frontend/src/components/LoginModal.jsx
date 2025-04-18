@@ -1,26 +1,31 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../domain/UserContext";
 
 // Login modal component
 const LoginModal = ({ onClose }) => {
+  const {createUser, loginUser} = useContext(UserContext);
   // state variables
   const [formMode, setFormMode] = useState("Sign in");
+  const [username, setUsername] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [resultError, setResultError] = useState("");
   // errors messages
   const [errors, setErrors] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
   // password regex for sign up validation
-  const PASSWORD_REGEX =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+?])[A-Za-z\d!@#$%^&*()_+?]{8,}$/;
+  const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+?])[A-Za-z\d!@#$%^&*()_+?]{5,}$/;
 
   // handle submit for sign in and sign up
   const handleSubmit = (e) => {
     e.preventDefault();
+    setResultError("")
     let newErrors = { email: "", password: "", confirmPassword: "" };
 
     // validate email
@@ -31,7 +36,7 @@ const LoginModal = ({ onClose }) => {
     // validate password for sign up
     if (formMode === "Sign up" && !PASSWORD_REGEX.test(password)) {
       newErrors.password =
-        "Password needs 1 uppercase, 1 number, 1 special character";
+        "Password needs 1 uppercase, 1 number, 1 special character and 5 characters long";
     }
 
     // validate confirm password for sign up
@@ -44,7 +49,13 @@ const LoginModal = ({ onClose }) => {
 
     // if no errors, log validation passed
     if (!Object.values(newErrors).some((error) => error)) {
-      console.log("Validation passed");
+      if (formMode == "Sign up") {
+        createUser(username, email, password)
+        .then((res) => res ? onClose() : setResultError("Faied to create account, try a new email"))
+      } else if (formMode == "Sign in") {
+        loginUser(email, password)
+        .then((res) => res ? onClose() : setResultError("Faied to login account, check your username and password"))
+      }
     }
   };
 
@@ -93,14 +104,27 @@ const LoginModal = ({ onClose }) => {
     }));
   };
 
+  // handle email change
+  const handleUsernameChange = (e) => {
+    const { value } = e.target;
+    // set username
+    setUsername(value);
+    setErrors((prev) => ({
+      ...prev,
+      // validate email
+      username: username.length >= 3
+        ? ""
+        : "At least 3 characters for username",
+    }));
+  };
+
   // notice words for sign in and sign up
   const notice =
-    formMode === "login" ? "Don't have an account？" : "Have an account？";
+    formMode === "Sign in" ? "Don't have an account？" : "Have an account？";
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center"
-      onClick={onClose}>
+      className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
       <div
         className="w-full max-w-lg p-8 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl relative animate-fade-in"
         onClick={(e) => e.stopPropagation()}>
@@ -161,6 +185,42 @@ const LoginModal = ({ onClose }) => {
               </p>
             )}
           </div>
+
+          {/* Form for sign in and sign up */}
+          {formMode == "Sign up" && (
+            <div className="mb-4">
+              <label htmlFor="username" className="block mb-2">
+                username
+              </label>
+              {/* username input */}
+              <input
+                type="username"
+                id="username"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition-all"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+              {/* username error message */}
+              {errors.username && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  {errors.username}
+                </p>
+              )}
+            </div>
+          )}
+          
 
           {/* Password input */}
           <div className="mb-4">
@@ -230,6 +290,23 @@ const LoginModal = ({ onClose }) => {
           )}
 
           {/* Sign in or sign up button */}
+          {resultError && (
+                <p className="text-red-500 text-sm mt-1 flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  {resultError}
+                </p>
+              )}
           <button
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all">
@@ -244,7 +321,8 @@ const LoginModal = ({ onClose }) => {
               className="text-blue-500 hover:text-blue-700 cursor-pointer ml-1 text-sm"
               onClick={() => {
                 setFormMode(formMode === "Sign in" ? "Sign up" : "Sign in");
-                setErrors({ email: "", password: "", confirmPassword: "" });
+                setErrors({username: "", email: "", password: "", confirmPassword: "" });
+                setResultError("")
                 setConfirmPassword("");
               }}>
               {formMode === "Sign in" ? "Sign up" : "Sign in"}

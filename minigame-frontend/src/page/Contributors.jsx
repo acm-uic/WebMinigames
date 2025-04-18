@@ -5,7 +5,8 @@ import {
   ThaiContributor,
   TrentonContributor,
   MinhContributor,
-  DanielContributor
+  DanielContributor,
+  MichaelContributor,
 } from "../contributors/Contributors";
 import "./contributors.css";
 export default function Contributors() {
@@ -18,7 +19,9 @@ export default function Contributors() {
         <TrentonContributor />
         <MinhContributor />
         <DanielContributor />
+        <MichaelContributor />
       </div>
     </div>
   );
 }
+

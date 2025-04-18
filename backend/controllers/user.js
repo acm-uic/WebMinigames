@@ -11,7 +11,7 @@ const UserControllers = {
   createUser: async (req, res) => {
     try {
       // Get the info from the user
-      const { userName, email, password, bio } = req.body;
+      const { userName, email, password, bio, role } = req.body;
       const avatar = req.file;
       // Check if there's any email alr existed
       const existedUser = await UserModel.findOne({
@@ -31,6 +31,7 @@ const UserControllers = {
         email,
         password: hashedPassword,
         bio,
+        role,
       };
       // Only add avatar if the user upload avatar file
       if (avatar) {
@@ -47,7 +48,7 @@ const UserControllers = {
       res.status(201).send({
         message: "User created successfully",
         success: true,
-        data: newUser,
+        data: {user:newUser},
       });
     } catch (error) {
       res.status(409).send({
@@ -82,6 +83,7 @@ const UserControllers = {
         _id: crrUser._id,
         email: crrUser.email,
         userName: crrUser.userName,
+        role: crrUser.role,
       };
 
       const accessToken = generateToken(
@@ -104,6 +106,7 @@ const UserControllers = {
         message: "User signs in successfully",
         success: true,
         data: {
+          user,
           accessToken,
           refreshToken,
         },
@@ -119,7 +122,7 @@ const UserControllers = {
   updateProfile: async (req, res) => {
     try {
       const { user } = req;
-      const { userName, email, bio } = req.body;
+      const { userName, email, bio, role } = req.body;
       const avatar = req.file;
 
       // Get the crrUser
@@ -136,6 +139,9 @@ const UserControllers = {
       }
       if (bio && String(bio) !== String(crrUser.bio)) {
         updatedFields.bio = bio;
+      }
+      if (role && String(role) !== String(crrUser.role)) {
+        updatedFields.role = role;
       }
       if (avatar) {
         // Get the current file "fileName"
