@@ -3,11 +3,13 @@ import { useContext, useState } from "react";
 import LoginModal from "../components/LoginModal";
 import { UserContext } from "../domain/UserContext";
 
+import logo from "../images/gglogo2.png";
+
 const Layout = () => {
   // state variables
-  const {isLoggedIn, username} = useContext(UserContext);
+  const { isLoggedIn, username } = useContext(UserContext);
   const [showLoginModal, setShowLoginModal] = useState(false);
-  
+
   const navigate = useNavigate();
 
   // handle profile click
@@ -20,13 +22,13 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="bg-blue-600 p-4">
-        <div className="container mx-auto flex justify-between items-center">
+      <nav className="bg-blue-600 p-1 h-[60px]">
+        <div className="h-full container mx-auto flex justify-between items-center">
           {/* Left section: App name and links */}
-          <div className="flex items-center space-x-8">
-            <div className="text-white text-lg font-bold">
-              <Link to="/">ACM@UIC Minigames</Link>
-            </div>
+          <div className="flex items-center space-x-8 h-full">
+            <Link to="/" className="h-full">
+              <img className="h-full" src={logo}/>
+            </Link>
             <ul className="flex space-x-2">
               <li className="text-white hover:text-gray-200">
                 <Link to="/all-games">All Minigames</Link>
@@ -39,7 +41,7 @@ const Layout = () => {
 
           {/* Right section: Profile icon & Sign in button */}
           <div className="flex flex-row items-center space-x-4 text-white">
-              {isLoggedIn && <div>Hello {username}!</div>}
+            {isLoggedIn && <div>Hello {username}!</div>}
             <div className="hover:text-gray-200">
               {/* If user is not logged in, show profile icon */}
               {isLoggedIn ? (
@@ -50,7 +52,8 @@ const Layout = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-8 h-8">
+                    className="w-8 h-8"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -66,7 +69,8 @@ const Layout = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-8 h-8">
+                    className="w-8 h-8"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
