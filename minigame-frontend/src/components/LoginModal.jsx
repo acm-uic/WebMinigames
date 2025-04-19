@@ -50,7 +50,7 @@ const LoginModal = ({ onClose }) => {
     // if no errors, log validation passed
     if (!Object.values(newErrors).some((error) => error)) {
       if (formMode == "Sign up") {
-        createUser(username, email, password)
+        createUser(username.trim(), email, password)
         .then((res) => res ? onClose() : setResultError("Faied to create account, try a new email"))
       } else if (formMode == "Sign in") {
         loginUser(email, password)
@@ -104,7 +104,7 @@ const LoginModal = ({ onClose }) => {
     }));
   };
 
-  // handle email change
+  // handle username change
   const handleUsernameChange = (e) => {
     const { value } = e.target;
     // set username
@@ -112,7 +112,7 @@ const LoginModal = ({ onClose }) => {
     setErrors((prev) => ({
       ...prev,
       // validate email
-      username: username.length >= 3
+      username: username.trim().length >= 3
         ? ""
         : "At least 3 characters for username",
     }));

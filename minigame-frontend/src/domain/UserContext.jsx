@@ -15,6 +15,7 @@ export const UserContextProvider = ({children}) => {
 //"https://i.pinimg.com/736x/c6/25/f6/c625f6315130d8329a95ae27d8e95564.jpg"
   const serverURL = import.meta.env.VITE_APP_SERVER_URL;
   const createUser = async (userName, email, password, bio="") => {
+    userName = userName.trim();
     console.log({userName, email, password, bio})
     const response = await fetch(`${serverURL}/api/public/users/create`,
       {
