@@ -14,6 +14,7 @@ import Contributors from "./page/Contributors.jsx";
 import GameDetails from "./components/GameDetails.jsx";
 import PostView from "./components/PostView.jsx";
 import PostViewPage from "./page/PostViewPage.jsx";
+import { SiteContextProvider } from "./domain/SiteContext.jsx";
 
 const exampleGame = {
   name: "Fortnite",
@@ -34,26 +35,27 @@ const exampleGame = {
 export default function App() {
   return (
     <UserContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="contributors" element={<Contributors />} />
-            <Route index element={<Homepage />} />
-            <Route path="all-games" element={<AllGames />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="game" element={<GamePage />} />
-            <Route
-              path="game-details"
-              element={<GameDetails game={exampleGame} />}
-            />
-            <Route path="create-post" element={<PostViewPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <SiteContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="contributors" element={<Contributors />} />
+              <Route index element={<Homepage />} />
+              <Route path="all-games" element={<AllGames />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="game" element={<GamePage />} />
+              <Route
+                path="game-details"
+                element={<GameDetails game={exampleGame} />}
+              />
+              <Route path="create-post" element={<PostViewPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SiteContextProvider>
     </UserContextProvider>
   );
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
-
