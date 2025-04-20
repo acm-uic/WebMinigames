@@ -22,18 +22,18 @@ const Layout = () => {
 
   return (
     <>
-      <nav className="bg-blue-600 p-1 h-[60px]">
-        <div className="h-full container mx-auto flex justify-between items-center">
+      <nav className="bg-blue-600 p-1 h-[60px] w-full">
+        <div className="w-full h-full px-2 md:mx-auto flex justify-between items-center box-border">
           {/* Left section: App name and links */}
           <div className="flex items-center space-x-8 h-full">
             <Link to="/" className="h-full">
-              <img className="h-full" src={logo}/>
+              <img className="h-full min-w-[130px]" src={logo} />
             </Link>
             <ul className="flex space-x-2">
               <li className="text-white hover:text-gray-200">
                 <Link to="/all-games">All Minigames</Link>
               </li>
-              <li className="text-white hover:text-gray-200">
+              <li className="text-white hover:text-gray-200 hidden md:block">
                 <Link to="/contributors">Contributors</Link>
               </li>
             </ul>
@@ -84,6 +84,13 @@ const Layout = () => {
         </div>
       </nav>
       <Outlet />
+      <footer className="bg-blue-600 p-1 h-[60px] w-full flex justify-center">
+        <ul>
+          <li className="text-black hover:text-gray-200">
+            <Link to="/contributors">Contributors</Link>
+          </li>
+        </ul>
+      </footer>
       {/* Login modal */}
       {showLoginModal && (
         <LoginModal onClose={() => setShowLoginModal(false)} />

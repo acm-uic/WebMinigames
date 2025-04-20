@@ -1,11 +1,13 @@
 .hero-outside-box {
     background-color: rgb(27, 125, 229);
-    display: inline-block;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
 .hero-inside-box {
-    margin: 50px;
+    margin-left: 50px;
+    margin-right: 20px;
     color: white;
     display: inline-block;
 }
@@ -25,3 +27,41 @@
     text-align: center;
 }
 
+.showcase {
+    
+}
+
+@media screen and (max-width: 1250px) {
+    .hero-outside-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-inside-box {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-inside-title {
+        font-size: 3.75em; 
+    }
+
+    .hero-inside-subtitle {
+        font-size: 2.25em; 
+    }
+
+    .showcase {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .showcase {
+        flex-direction: column;
+    }
+}
