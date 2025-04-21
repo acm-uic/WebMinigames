@@ -114,6 +114,29 @@ const PostControllers = {
       });
     }
   },
+  getPostsByUserId: async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const listPosts = await PostModel.find({
+        userId: userId,
+      });
+      if (listPosts.length === 0) {
+        throw new Error("No posts by this user found!");
+      }
+
+      res.status(201).send({
+        message: "Here is a list of posts by this user!",
+        success: true,
+        data: listPosts,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default PostControllers;

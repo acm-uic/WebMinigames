@@ -41,9 +41,9 @@ const PostMiddlewares = {
     }
   },
 
-  getPostByUser: (req, res, next) => {
+  getPostsByUser: (req, res, next) => {
     try {
-      const { userId } = req.params;
+      const { userId } = req.query;
       if (!userId) throw new Error("Please enter userId");
 
       return next();

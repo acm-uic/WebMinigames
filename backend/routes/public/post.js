@@ -5,10 +5,17 @@ import PostControllers from "../../controllers/post.js";
 const PostPublicRoute = Router();
 
 // Get all posts
-PostPublicRoute.get("/get", PostControllers.getAllPosts);
+PostPublicRoute.get("/getAll", PostControllers.getAllPosts);
 
 // Get posts by userId
-PostPublicRoute.get("/user/get/:userId");
+PostPublicRoute.get(
+  "/get",
+  (req, res, next) => {
+    if (req.query.userId) return PostMiddlewares.getPostsByUser(req, res, next);
+    return next();
+  },
+  PostControllers.getPostsByUserId
+);
 
 // // Get posts by postId
 // PostPublicRoute.get("/post/get/:postId");
