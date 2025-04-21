@@ -40,6 +40,22 @@ const PostMiddlewares = {
       });
     }
   },
+
+  getPostByUser: (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      if (!userId) throw new Error("Please enter userId");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+        error,
+      });
+    }
+  },
 };
 
 export default PostMiddlewares;
