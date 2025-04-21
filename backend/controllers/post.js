@@ -96,6 +96,24 @@ const PostControllers = {
       });
     }
   },
+  getAllPosts: async (req, res) => {
+    try {
+      const listPosts = await PostModel.find();
+      if (listPosts.length === 0) throw new Error("No posts found!");
+
+      res.status(201).send({
+        message: "Here is a list of posts!",
+        success: true,
+        data: listPosts,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default PostControllers;

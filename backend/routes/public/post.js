@@ -5,6 +5,6 @@ import PostControllers from "../../controllers/post.js";
 const PostPublicRoute = Router();
 
 // Get all posts
-PostPublicRoute.get("/get");
+PostPublicRoute.get("/get", PostControllers.getAllPosts);
 
 export default PostPublicRoute;
