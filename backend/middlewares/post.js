@@ -40,11 +40,25 @@ const PostMiddlewares = {
       });
     }
   },
-
   getPostsByUser: (req, res, next) => {
     try {
       const { userId } = req.query;
       if (!userId) throw new Error("Please enter userId");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+        error,
+      });
+    }
+  },
+  getPostById: (req, res, next) => {
+    try {
+      const { postId } = req.query;
+      if (!postId) throw new Error("Please enter postId");
 
       return next();
     } catch (error) {
