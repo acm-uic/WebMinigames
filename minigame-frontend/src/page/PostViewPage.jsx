@@ -53,7 +53,7 @@ export default function PostViewPage() {
       "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
   };
 
-  const [files, setFiles] = useState([exampleFile1, exampleFile2]);
+  const [files, setFiles] = useState([]);
   {
     /*------------------------------------------------------------------------------ */
   }
@@ -185,9 +185,10 @@ export default function PostViewPage() {
   };
 
   const handleFileChange = async (event) => {
-    const validFiles = [];
+    const validFiles = [...files];
+    console.log(validFiles);
     const newFiles = Array.from(event.target.files);
-
+    console.log(newFiles);
     setFileError("");
 
     for (const file of newFiles) {
@@ -230,7 +231,10 @@ export default function PostViewPage() {
       if (currentIndex >= updatedFiles.length)
         newIndex = Math.max(0, updatedFiles.length - 1);
       setCurrentIndex(newIndex);
-      document.getElementById("fileInput").value = null;
+      console.log(updatedFiles.length);
+      if (updatedFiles.length == 0) {
+        document.getElementById("fileInput").value = null;
+      }
       return updatedFiles;
     });
   };
@@ -370,6 +374,12 @@ export default function PostViewPage() {
                       )}
                     </div>
                   ))}
+                  <div className="h-[70px] bg-green-300 w-full  flex items-center justify-center">
+                    <FaCloudUploadAlt
+                      className=" scale-[200%] "
+                      onClick={handleIconClick}
+                    />
+                  </div>
                 </div>
               </div>
             )}
