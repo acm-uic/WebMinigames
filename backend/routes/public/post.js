@@ -7,17 +7,24 @@ const PostPublicRoute = Router();
 // Get all posts
 PostPublicRoute.get("/getAll", PostControllers.getAllPosts);
 
-// Get posts by userId
-PostPublicRoute.get(
-  "/get",
-  (req, res, next) => {
-    if (req.query.userId) return PostMiddlewares.getPostsByUser(req, res, next);
-    return next();
-  },
-  PostControllers.getPostsByUserId
-);
+PostPublicRoute.get("/get", (req, res, next) => {
+  // Get posts by userId
+  if (req.query.userId) {
+    return PostMiddlewares.getPostsByUser(req, res, () =>
+      PostControllers.getPostsByUser(req, res)
+    );
+  }
+  // Get post by postId
+  if (req.query.postId) {
+    return PostMiddlewares.getPostById(req, res, () =>
+      PostControllers.getPostById(req, res)
+    );
+  }
 
-// // Get posts by postId
-// PostPublicRoute.get("/post/get/:postId");
+  res.status(400).json({
+    success: false,
+    message: "Missing query: please provide either userId or postId",
+  });
+});
 
 export default PostPublicRoute;
