@@ -269,7 +269,7 @@ export default function PostViewPage() {
   };
 
   return (
-    <div className=" overflow-y-auto flex flex-col items-center justify-center relative h-screen p-5 lg:p-7">
+    <div className=" overflow-y-auto flex flex-col items-center justify-center relative h-full p-5 lg:p-7">
       <div className=" w-full  max-w-[1250px]  bottom-10 min-h-[90%] xs:max-h-[80%] xs:max-w-[85%]  max-h-[50%] h-[80vh] relative flex scale-100  sm:scale-90 xs:scale-[90%]  flex-col text-black rounded-lg">
         <h3 className="text-4xl bold-text">Create post</h3>
         <div className="md:min-h-[20%] w-full mb-1 top-0 xs:min-h-[15.8%] ">
