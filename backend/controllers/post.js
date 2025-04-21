@@ -117,7 +117,6 @@ const PostControllers = {
   getPostsByUser: async (req, res) => {
     try {
       const { userId } = req.query;
-      console.log(userId);
       const listPosts = await PostModel.find({
         author: userId,
       });
