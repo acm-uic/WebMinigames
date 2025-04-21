@@ -374,9 +374,9 @@ export default function PostViewPage() {
                       )}
                     </div>
                   ))}
-                  <div className="h-[70px] bg-green-300 w-full  flex items-center justify-center">
+                  <div className="h-[70px] w-full flex items-center justify-center">
                     <FaCloudUploadAlt
-                      className=" scale-[200%] "
+                      className=" scale-[200%] cursor-pointer"
                       onClick={handleIconClick}
                     />
                   </div>
