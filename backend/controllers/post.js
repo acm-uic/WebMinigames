@@ -114,11 +114,12 @@ const PostControllers = {
       });
     }
   },
-  getPostsByUserId: async (req, res) => {
+  getPostsByUser: async (req, res) => {
     try {
-      const { userId } = req.params;
+      const { userId } = req.query;
+      console.log(userId);
       const listPosts = await PostModel.find({
-        userId: userId,
+        author: userId,
       });
       if (listPosts.length === 0) {
         throw new Error("No posts by this user found!");
@@ -128,6 +129,26 @@ const PostControllers = {
         message: "Here is a list of posts by this user!",
         success: true,
         data: listPosts,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  getPostById: async (req, res) => {
+    try {
+      const { postId } = req.query;
+      const crrPost = await PostModel.findById(postId);
+
+      if (!crrPost) throw new Error("This post doesn't exist!");
+
+      res.status(201).send({
+        message: "Here is your post!",
+        success: true,
+        data: crrPost,
       });
     } catch (error) {
       res.status(500).send({
