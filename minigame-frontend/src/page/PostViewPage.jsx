@@ -53,7 +53,7 @@ export default function PostViewPage() {
       "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
   };
 
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([exampleFile1, exampleFile2]);
   {
     /*------------------------------------------------------------------------------ */
   }
