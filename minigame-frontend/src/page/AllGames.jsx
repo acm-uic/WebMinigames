@@ -20,13 +20,11 @@ const AllGames = () => {
   console.log(allGames);
   return (
     <div className="all-games-page">
-      <div
-        className={`font-bold relative right-0 bg-slate-400 w-fit h-fit p-4 rounded-lg border-r-4 cursor-pointer`}
-      >
-        <Link to="/create-game">
-          <button>Add Game Entry</button>
-        </Link>
-      </div>
+      <Link to="/create-game">
+        <div className={`font-bold bg-slate-400 w-fit h-fit p-4 rounded-lg border-r-4 cursor-pointer`}>
+            <button>Add Game Entry</button>
+        </div>
+      </Link>
       {/* <div>All Games Page</div> */}
       <div className="game-list">
         {allGames.map((game, index) => (
