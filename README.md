@@ -1,5 +1,5 @@
 # GameGimel
-Website link: gamegimel.acmuic.org
+Hosted Website Link: gamegimel.acmuic.org
 
 ## Running the project locally
 In the terminal:
