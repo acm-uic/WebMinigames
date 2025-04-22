@@ -75,7 +75,11 @@ const CommentControllers = {
   },
   getAllComment: async (req, res) => {
     try {
-      const listComments = await CommentModel.find({ isDelete: false });
+      const admin = req.user?.role === "Admin";
+
+      const commentFilter = admin ? {} : { isDelete: false };
+
+      const listComments = await CommentModel.find(commentFilter);
       if (listComments.length === 0) throw new Error("No comments found!");
 
       res.status(201).send({
@@ -95,10 +99,13 @@ const CommentControllers = {
     try {
       const { postId } = req.params;
 
-      const listComments = await CommentModel.find({
-        postId: postId,
-        isDelete: false,
-      });
+      const admin = req.user?.role === "Admin";
+
+      const commentFilter = admin
+        ? { postId: postId }
+        : { postId: postId, isDelete: false };
+
+      const listComments = await CommentModel.find(commentFilter);
 
       if (listComments.length === 0) {
         throw new Error("No comments in this post!");
