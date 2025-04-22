@@ -63,7 +63,7 @@ export default function Profile() {
       )}
       {ChangeImageIcon && (
         <div className="fixed bg-white shadow-md rounded-xl  xs:w-[80%] xs:h-[40%] md:w-[65%] md:h-[30%] sm:w-[70%] sm:h-[30%] lg:w-[42%] lg:h-[50%]  p-4 z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-          <div className="  bg-green-300 flex items-center relative w-full h-[22%]">
+          <div className="  flex items-center relative w-full h-[22%]">
             <p className="xs:text-2xl sm:text-3xl md:text-3xl lg:text-3xl absolute left-5">
               Update Profile Image
             </p>
@@ -73,19 +73,21 @@ export default function Profile() {
             />
           </div>
           <button
-            className="w-full h-[10%] bg-green-500 border border-gray-300 rounded px-4 py-2 text-left"
+            className="w-full h-[10%] bg-blue-200 flex items-center rounded border border-gray-300  px-4 py-2 text-left"
             onClick={() => setIsOpen(!isOpen)}
           >
             {selected || "Select an option"}
           </button>
           {isOpen && (
-            <div className=" ">
-              <ul className="absolute z-10 mt-1 max-h-40 w-full overflow-y-auto bg-white border border-gray-300 rounded shadow-lg">
+            <div>
+              <ul className="absolute z-10 mt-1 max-h-40 w-[95%] overflow-y-auto bg-white border border-gray-300 rounded shadow-lg">
                 {options.map((option) => (
                   <li
                     key={option}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => handleSelect(option)}
+                    onClick={() => {
+                      handleSelect(option), setIsOpen(!isOpen);
+                    }}
                   >
                     {option}
                   </li>
@@ -93,6 +95,17 @@ export default function Profile() {
               </ul>
             </div>
           )}
+          {selected == "Embed Link" && (
+            <div className="w-full h-[70%]">
+              <textarea
+                type="text"
+                id="subject-title"
+                className="w-full mt-[30px] max-h-[50px]  lg:max-h-[40%] xs:max-h-[29%] text-gray-500 text-2xl xs:text-xl lg:text-2xl bg-gray-100  pl-1 rounded-md focus:outline-none resize-none"
+                placeholder="Link"
+              />
+            </div>
+          )}
+          {selected == "Image Upload" && <div className="w-full h-[70%]"></div>}
         </div>
       )}
     </div>
