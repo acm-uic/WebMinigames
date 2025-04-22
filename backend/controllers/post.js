@@ -98,7 +98,11 @@ const PostControllers = {
   },
   getAllPosts: async (req, res) => {
     try {
-      const listPosts = await PostModel.find({ isDelete: false });
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin ? {} : { isDelete: false };
+
+      const listPosts = await PostModel.find(postFilter);
       if (listPosts.length === 0) throw new Error("No posts found!");
 
       res.status(201).send({
@@ -117,10 +121,19 @@ const PostControllers = {
   getPostsByUser: async (req, res) => {
     try {
       const { userId } = req.query;
-      const listPosts = await PostModel.find({
-        author: userId,
-        isDelete: false,
-      });
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin
+        ? {
+            author: userId,
+          }
+        : {
+            author: userId,
+            isDelete: false,
+          };
+
+      const listPosts = await PostModel.find(postFilter);
+
       if (listPosts.length === 0) {
         throw new Error("No posts by this user found!");
       }
@@ -141,10 +154,18 @@ const PostControllers = {
   getPostById: async (req, res) => {
     try {
       const { postId } = req.query;
-      const crrPost = await PostModel.find({
-        _id: postId,
-        isDelete: false,
-      });
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin
+        ? {
+            _id: postId,
+          }
+        : {
+            _id: postId,
+            isDelete: false,
+          };
+
+      const crrPost = await PostModel.find(postFilter);
 
       if (!crrPost) throw new Error("This post doesn't exist!");
 
