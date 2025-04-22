@@ -8,10 +8,9 @@ import React, { useState } from "react"
         className: classes to style the element that will trigger the popup
         popupClassName: classes to style the element after being hovered over
         PopupInfo: component that will be displayed in the popup after the initial element
-        popupProps: props to be passed to the PopupInfo component
         children: children of the Popup component (automatically added when Popup is wrapped around other elements)
 */
-const Popup = ({ className, popupClassName, PopupInfo, popupProps, children }) => {
+const Popup = ({ className, popupClassName, PopupInfo, children }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     return (
@@ -27,8 +26,8 @@ const Popup = ({ className, popupClassName, PopupInfo, popupProps, children }) =
                 <div className={className}>
                     {children}
                 </div>
-                {/* Given component with given props */}
-                <PopupInfo {...popupProps} />
+                {/* Given component */}
+                {PopupInfo}
             </div>
         </div>
     )

@@ -3,7 +3,7 @@ import { useState } from "react"
 import Popup from "./Popup.jsx"
 import ProfilePopup from "./ProfilePopup.jsx"
 
-const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", profile="/profile", title="Untitled Post", body="Nothing here...", imgs }) => {
+const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", profile="/profile", title="Untitled Post", body="Nothing here...", imgs, className }) => {
     const [imgIndex, setImgIndex] = useState(0)
 
     /* Format all given images
@@ -43,9 +43,9 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
    
     /* Post View Div */
     return (
-        <div className="flex flex-col lg:w-3/4 w-full h-[350px] p-2 pt-0 bg-[#5B6EE1] m-auto">
+        <div className={`${className} flex flex-col lg:w-3/4 w-full h-[350px] p-2 pt-0 bg-[#5B6EE1] m-auto`}>
             <div className="text-[20px] font-semibold text-white italic tracking-widest">
-                {title}
+                <Link to="/post">{title}</Link>
                 <div className="size-[20px] mt-[5px] border border-black rounded-sm bg-[#D95763] float-right"></div>
             </div>
 
@@ -54,8 +54,7 @@ const PostView = ({ username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43
                 <div className="flex flex-col gap-3 size-full">
                     <Popup className="flex items-center gap-2 text-wrap h-[50px] text-[20px]" 
                             popupClassName="bg-[#3B85E7] text-white font-semibold" 
-                            PopupInfo={ProfilePopup} 
-                            popupProps={{ bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }} >
+                            PopupInfo={<ProfilePopup bio="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />} >
                         <img className="w-[50px] rounded-full" src={icon} />
                         {username}
                     </Popup>
