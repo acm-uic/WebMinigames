@@ -116,6 +116,43 @@ const CommentControllers = {
       });
     }
   },
+  deleteComment: async (req, res) => {
+    try {
+      const { user } = req;
+      const { commentId } = req.params;
+
+      // Get the current post
+      const crrComment = await CommentModel.findById(commentId);
+      if (!crrComment) throw new Error("Cannot find comment!");
+
+      // Check if the user is authorized to delete post
+      const owner = authorizeUser(user._id, crrComment.author);
+      const admin = user.role === "Admin";
+
+      if (!owner.success && !admin) {
+        throw new Error("Unauthorize to delete comment!");
+      }
+      // Update + Fetch in parallel
+      const commentFilter = admin ? {} : { isDelete: false };
+
+      const [_, listComments] = await Promise.all([
+        CommentModel.findByIdAndUpdate(commentId, { isDelete: true }),
+        CommentModel.find(commentFilter),
+      ]);
+
+      res.status(200).send({
+        message: "Comment deleted!",
+        success: true,
+        data: listComments,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default CommentControllers;
