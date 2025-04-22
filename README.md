@@ -8,11 +8,11 @@ In the terminal:
 
 ## Contributors
 
-Adrian Knight - [@Ajknight121](https://github.com/Ajknight121)
-Chao Liu - [@JackLiu00331](https://github.com/JackLiu00331)
-Viet Thai Nguyen - [@thai.nguyen07](https://github.com/AlgoriThai07)
-Trenton Coleman - [@tdcoleman127](https://github.com/tdcoleman127)
-Minh Ngo - [@hoangngo-sudo](https://github.com/hoangngo-sudo)
-Daniel Barajas - [@danbarajas](https://github.com/danbarajas)
-Michael Jaimes - [@mike6612](https://github.com/mike6612)
-Dylan Nguyen - [@dyl4915](https://github.com/dyl4915)
+- Adrian Knight - [@Ajknight121](https://github.com/Ajknight121) 
+- Chao Liu - [@JackLiu00331](https://github.com/JackLiu00331)
+- Viet Thai Nguyen - [@thai.nguyen07](https://github.com/AlgoriThai07)
+- Trenton Coleman - [@tdcoleman127](https://github.com/tdcoleman127)
+- Minh Ngo - [@hoangngo-sudo](https://github.com/hoangngo-sudo)
+- Daniel Barajas - [@danbarajas](https://github.com/danbarajas)
+- Michael Jaimes - [@mike6612](https://github.com/mike6612)
+- Dylan Nguyen - [@dyl4915](https://github.com/dyl4915)
