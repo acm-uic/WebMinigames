@@ -70,6 +70,21 @@ const PostMiddlewares = {
       });
     }
   },
+  deletePost: (req, res, next) => {
+    try {
+      const { postId } = req.query;
+      if (!postId) throw new Error("Please enter postId");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+        error,
+      });
+    }
+  },
 };
 
 export default PostMiddlewares;
