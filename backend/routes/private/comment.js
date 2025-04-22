@@ -17,4 +17,10 @@ CommentPrivateRoute.put(
   CommentControllers.updateComment
 );
 
+CommentPrivateRoute.delete(
+  "/delete/:commentId",
+  CommentMiddlewares.deleteComment,
+  CommentControllers.deleteComment
+);
+
 export default CommentPrivateRoute;
