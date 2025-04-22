@@ -1,4 +1,4 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import LoginModal from "../components/LoginModal";
 import { UserContext } from "../domain/UserContext";
@@ -20,9 +20,16 @@ const Layout = () => {
     }
   };
 
+  const currentLocation = useLocation();
+
   return (
     <>
       <nav className="bg-blue-600 p-1 h-[60px] w-full">
+        <div className={`z-50 fixed bottom-4 right-4 font-bold bg-slate-400 w-fit h-fit p-4 rounded-lg border-r-4 cursor-pointer ${currentLocation.pathname != "/create-post" ? "" : "hidden"}`}>
+          <Link to="/create-post">
+            <button>Create Post +</button>
+          </Link>
+        </div>
         <div className="w-full h-full px-2 md:mx-auto flex justify-between items-center box-border">
           {/* Left section: App name and links */}
           <div className="flex items-center space-x-8 h-full">
@@ -88,6 +95,11 @@ const Layout = () => {
         <ul>
           <li className="text-black hover:text-gray-200">
             <Link to="/contributors">Contributors</Link>
+          </li>
+          <li>
+            <Link to="/create-post">
+              <button>Create Post</button>
+            </Link>
           </li>
         </ul>
       </footer>
