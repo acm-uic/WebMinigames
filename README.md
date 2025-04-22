@@ -1,4 +1,5 @@
-# WebMinigames
+# GameGimel
+gamegimel.acmuic.org
 
 ## Running the project locally
 In the terminal:
