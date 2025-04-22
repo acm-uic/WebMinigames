@@ -2,11 +2,21 @@ import "./css/ProfileBio.css";
 import { useEffect, useState } from "react";
 
 export function ProfileBioComponent(props) {
-  const { imageLink, user, bio, handleEdit, updateBio, canEdit, editing } =
-    props;
+  const {
+    imageLink,
+    user,
+    bio,
+    handleEdit,
+    updateBio,
+    canEdit,
+    editing,
+    setChangeImageIcon,
+    ChangeImageIcon,
+  } = props;
   const [newImageLink, setNewImageLink] = useState(imageLink);
   const [newUser, setnewUser] = useState(user);
   const [newBio, setNewBio] = useState(bio);
+
   useEffect(() => {
     if (!editing) {
       setNewImageLink(imageLink);
@@ -61,7 +71,10 @@ export function ProfileBioComponent(props) {
             src={newImageLink}
             alt="Profile Picture"
           />
-          <div className="absolute left-[18.5%] h-[100%] w-[63%] inset-0  bg-black bg-opacity-40 flex items-end justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div
+            onClick={() => setChangeImageIcon(!ChangeImageIcon)}
+            className="absolute left-[18.5%] h-[100%] w-[63%] inset-0  bg-black bg-opacity-40 flex items-end justify-center rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+          >
             <div className="text-white text-xs mb-2 flex items-center gap-1">
               Edit
             </div>
