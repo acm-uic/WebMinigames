@@ -75,7 +75,7 @@ const CommentControllers = {
   },
   getAllComment: async (req, res) => {
     try {
-      const listComments = await CommentModel.find();
+      const listComments = await CommentModel.find({ isDelete: false });
       if (listComments.length === 0) throw new Error("No comments found!");
 
       res.status(201).send({
@@ -97,6 +97,7 @@ const CommentControllers = {
 
       const listComments = await CommentModel.find({
         postId: postId,
+        isDelete: false,
       });
 
       if (listComments.length === 0) {
