@@ -98,7 +98,11 @@ const PostControllers = {
   },
   getAllPosts: async (req, res) => {
     try {
-      const listPosts = await PostModel.find();
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin ? {} : { isDelete: false };
+
+      const listPosts = await PostModel.find(postFilter);
       if (listPosts.length === 0) throw new Error("No posts found!");
 
       res.status(201).send({
@@ -117,9 +121,19 @@ const PostControllers = {
   getPostsByUser: async (req, res) => {
     try {
       const { userId } = req.query;
-      const listPosts = await PostModel.find({
-        author: userId,
-      });
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin
+        ? {
+            author: userId,
+          }
+        : {
+            author: userId,
+            isDelete: false,
+          };
+
+      const listPosts = await PostModel.find(postFilter);
+
       if (listPosts.length === 0) {
         throw new Error("No posts by this user found!");
       }
@@ -140,7 +154,18 @@ const PostControllers = {
   getPostById: async (req, res) => {
     try {
       const { postId } = req.query;
-      const crrPost = await PostModel.findById(postId);
+      const admin = req.user?.role === "Admin";
+
+      const postFilter = admin
+        ? {
+            _id: postId,
+          }
+        : {
+            _id: postId,
+            isDelete: false,
+          };
+
+      const crrPost = await PostModel.find(postFilter);
 
       if (!crrPost) throw new Error("This post doesn't exist!");
 
@@ -148,6 +173,43 @@ const PostControllers = {
         message: "Here is your post!",
         success: true,
         data: crrPost,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  deletePost: async (req, res) => {
+    try {
+      const { user } = req;
+      const { postId } = req.params;
+
+      // Get the current post
+      const crrPost = await PostModel.findById(postId);
+      if (!crrPost) throw new Error("Cannot find post!");
+
+      // Check if the user is authorized to delete post
+      const owner = authorizeUser(user._id, crrPost.author);
+      const admin = user.role === "Admin";
+
+      if (!owner.success && !admin) {
+        throw new Error("Unauthorize to delete post!");
+      }
+      // Update + Fetch in parallel
+      const postFilter = admin ? {} : { isDelete: false };
+
+      const [_, listPosts] = await Promise.all([
+        PostModel.findByIdAndUpdate(postId, { isDelete: true }),
+        PostModel.find(postFilter),
+      ]);
+
+      res.status(200).send({
+        message: "Post deleted!",
+        success: true,
+        data: listPosts,
       });
     } catch (error) {
       res.status(500).send({

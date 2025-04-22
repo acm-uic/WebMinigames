@@ -50,6 +50,20 @@ const CommentMiddlewares = {
       });
     }
   },
+  deleteComment: (req, res, next) => {
+    try {
+      const { commentId } = req.params;
+      if (!commentId) throw new Error("Please enter commentId on the params!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default CommentMiddlewares;
