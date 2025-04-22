@@ -185,7 +185,7 @@ export default function PostViewPage() {
   };
 
   const handleFileChange = async (event) => {
-    const validFiles = [];
+    const validFiles = [...files];
     const newFiles = Array.from(event.target.files);
 
     setFileError("");
@@ -222,17 +222,19 @@ export default function PostViewPage() {
     }
     setFiles(validFiles);
   };
-
   const handleRemoveFile = (index) => {
-    setFiles((prevFiles) => {
-      const updatedFiles = prevFiles.filter((_, i) => i !== index);
-      let newIndex = currentIndex;
-      if (currentIndex >= updatedFiles.length)
-        newIndex = Math.max(0, updatedFiles.length - 1);
-      setCurrentIndex(newIndex);
-      document.getElementById("fileInput").value = null;
-      return updatedFiles;
-    });
+    const newFiles = [...files];
+    newFiles.splice(index, 1);
+
+    setFiles(newFiles);
+
+    const safeIndex = Math.max(0, Math.min(currentIndex, newFiles.length - 1));
+    setCurrentIndex(safeIndex);
+
+    if (newFiles.length === 0) {
+      const input = document.getElementById("fileInput");
+      if (input) input.value = null;
+    }
   };
 
   const nextSlide = () => {
@@ -370,6 +372,12 @@ export default function PostViewPage() {
                       )}
                     </div>
                   ))}
+                  <div className="h-[70px] w-full flex items-center justify-center">
+                    <FaCloudUploadAlt
+                      className=" scale-[200%] cursor-pointer"
+                      onClick={handleIconClick}
+                    />
+                  </div>
                 </div>
               </div>
             )}
@@ -393,15 +401,16 @@ export default function PostViewPage() {
                 </button>
 
                 {/* Left Arrow */}
-                {files.length > 1 && currentIndex > 0 && (
-                  <button
-                    className="absolute left-2 md:h-[6%]  xs:h-[14%] sm:h-[16%] lg:max-h-[40px]  xl:h-[10%] lg:h-[10%] bg-black z-10 text-white p-2 rounded-full shadow-md hover:bg-black hover:opacity-40"
-                    onClick={prevSlide}
-                  >
-                    <FaArrowLeft className="w-[100%] h-[100%]" />
-                  </button>
-                )}
-
+                {files.length > 1 &&
+                  currentIndex > 0 &&
+                  files[currentIndex] && (
+                    <button
+                      className="absolute left-2 md:h-[6%]  xs:h-[14%] sm:h-[16%] lg:max-h-[40px]  xl:h-[10%] lg:h-[10%] bg-black z-10 text-white p-2 rounded-full shadow-md hover:bg-black hover:opacity-40"
+                      onClick={prevSlide}
+                    >
+                      <FaArrowLeft className="w-[100%] h-[100%]" />
+                    </button>
+                  )}
                 {files[currentIndex].file.type.startsWith("image/") ? (
                   <img
                     src={files[currentIndex].previewUrl}
