@@ -20,4 +20,10 @@ PostPrivateRoute.put(
   PostControllers.updatePost
 );
 
+PostPrivateRoute.delete(
+  "/delete/:postId",
+  PostMiddlewares.deletePost,
+  PostControllers.deletePost
+);
+
 export default PostPrivateRoute;

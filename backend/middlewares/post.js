@@ -72,7 +72,7 @@ const PostMiddlewares = {
   },
   deletePost: (req, res, next) => {
     try {
-      const { postId } = req.query;
+      const { postId } = req.params;
       if (!postId) throw new Error("Please enter postId");
 
       return next();
