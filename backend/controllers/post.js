@@ -157,6 +157,43 @@ const PostControllers = {
       });
     }
   },
+  deletePost: async (req, res) => {
+    try {
+      const { user } = req;
+      const { postId } = req.params;
+
+      // Get the current post
+      const crrPost = await PostModel.findById(postId);
+      if (!crrPost) throw new Error("Cannot find post!");
+
+      // Check if the user is authorized to delete post
+      const owner = authorizeUser(user._id, crrPost.author);
+      const admin = user.role === "Admin";
+
+      if (!owner.success && !admin) {
+        throw new Error("Unauthorize to delete post!");
+      }
+      // Update + Fetch in parallel
+      const postFilter = admin ? {} : { isDelete: false };
+
+      const [_, listPosts] = await Promise.all([
+        PostModel.findByIdAndUpdate(postId, { isDelete: true }),
+        PostModel.find(postFilter),
+      ]);
+
+      res.status(200).send({
+        message: "Post deleted!",
+        success: true,
+        data: listPosts,
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default PostControllers;
