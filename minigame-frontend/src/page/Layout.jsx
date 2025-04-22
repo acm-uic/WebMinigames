@@ -31,7 +31,7 @@ const Layout = () => {
             </Link>
             <ul className="flex space-x-2">
               <li className="text-white hover:text-gray-200">
-                <Link to="/all-games">All Minigames</Link>
+                <Link to="/all-games">All Games</Link>
               </li>
               <li className="text-white hover:text-gray-200 hidden md:block">
                 <Link to="/contributors">Contributors</Link>

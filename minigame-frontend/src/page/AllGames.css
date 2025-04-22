@@ -1,0 +1,44 @@
+
+.all-games-page {
+  height: 80vh;
+}
+
+.game-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 40px;
+}
+
+.game-card {
+  width: 300px; /* Adjust as needed */
+  margin: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.game-card:hover {
+  box-shadow: 1px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-image-container {
+  height: 200px; /* Adjust based on image aspect ratio */
+  position: relative;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-title {
+  position: relative;
+  z-index: 5;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+}

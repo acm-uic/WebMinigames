@@ -1,7 +1,7 @@
 export default function GameDetails({ game }) {
   return (
     <div className=" flex flex-col ">
-      <img src={game.cover} alt="Game Cover" className="w-full h-auto " />
+      <img src={game.coverImage} alt="Game Cover" className="w-full h-auto" />
 
       <div className="text-xs break-words whitespace-normal w-full h-auto py-1 mt-3 p-2 bg-gray-400">
         <p className="mb-1">
@@ -18,7 +18,7 @@ export default function GameDetails({ game }) {
       <div className="w-full h-auto p-2 py-1 mt-3 bg-gray-400 ">
         <p className="text-xs mb-1 ">PLAY NOW:</p>
         <ul className="text-xs ">
-          {game.links.map((link, index) => (
+          {game.relatedLinks.map((link, index) => (
             <li className="mb-1" key={index}>
               Source {`${index + 1}: `}
               <a
