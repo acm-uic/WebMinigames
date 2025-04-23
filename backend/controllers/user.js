@@ -48,7 +48,7 @@ const UserControllers = {
       res.status(201).send({
         message: "User created successfully",
         success: true,
-        data: {user:newUser},
+        data: { user: newUser },
       });
     } catch (error) {
       res.status(409).send({
@@ -177,6 +177,41 @@ const UserControllers = {
       });
     } catch (error) {
       res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  getUserInfo: async (req, res) => {
+    try {
+      // Get the userId
+      const { userId } = req.params;
+
+      // Check if user exist
+      const crrUser = await UserModel.findById(userId);
+
+      // If does not exist user
+      if (!crrUser) throw new Error("Cannot find user");
+
+      const user = {
+        _id: crrUser._id,
+        email: crrUser.email,
+        userName: crrUser.userName,
+        role: crrUser.role,
+        bio: crrUser.bio,
+        avatar: crrUser.avatar,
+        likedGames: crrUser.likedGames,
+        interests: crrUser.interests,
+      };
+
+      res.status(201).send({
+        message: "Here is this user info!",
+        success: true,
+        data: user,
+      });
+    } catch (error) {
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,
