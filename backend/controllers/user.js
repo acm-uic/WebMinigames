@@ -218,6 +218,60 @@ const UserControllers = {
       });
     }
   },
+  likeGame: async (req, res) => {
+    try {
+      // Get the userId
+      const { game } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $addToSet: { likedGames: game } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Game liked successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  addInterest: async (req, res) => {
+    try {
+      // Get the userId
+      const { interest } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $addToSet: { interests: interest } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Interest added successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default UserControllers;
