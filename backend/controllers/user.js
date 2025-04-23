@@ -245,6 +245,33 @@ const UserControllers = {
       });
     }
   },
+  unlikeGame: async (req, res) => {
+    try {
+      // Get the userId
+      const { game } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $pull: { likedGames: game } },
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Game unliked successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
   addInterest: async (req, res) => {
     try {
       // Get the userId
@@ -261,6 +288,33 @@ const UserControllers = {
 
       res.status(200).send({
         message: "Interest added successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  removeInterest: async (req, res) => {
+    try {
+      // Get the userId
+      const { interest } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $pull: { interests: interest } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Interest removed successfully!",
         success: true,
         data: updatedUser,
       });
