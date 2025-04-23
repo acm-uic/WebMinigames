@@ -28,4 +28,18 @@ UserPrivateRoute.post(
   UserControllers.addInterest
 );
 
+UserPrivateRoute.delete(
+  "/unlikeGame",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.unlikeGame,
+  UserControllers.unlikeGame
+);
+
+UserPrivateRoute.delete(
+  "/removeInterest",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.removeInterest,
+  UserControllers.removeInterest
+);
+
 export default UserPrivateRoute;
