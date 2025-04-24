@@ -1,9 +1,10 @@
 import React from "react";
 import { UserContext } from "../domain/UserContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { ProfileBioComponent } from "../components/ProfileBioComponent.jsx";
 import { ProfileDetails } from "../components/ProfileDetails.jsx";
 import { GoXCircle } from "react-icons/go";
+import { FaCloudUploadAlt } from "react-icons/fa";
 import "./profile.css";
 
 export default function Profile() {
@@ -14,6 +15,33 @@ export default function Profile() {
   const options = ["Embed Link", "Image Upload"];
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [imagePreview, setimagePreview] = useState([]);
+
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = (e) => {
+    e.preventDefault();
+    const validFile = [];
+    const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    validFile.push({
+      file: file,
+      previewUrl: imageUrl,
+    });
+    setimagePreview(validFile);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const validFile = [];
+    const file = e.dataTransfer.files[0];
+    const imageUrl = URL.createObjectURL(file);
+    validFile.push({
+      file: file,
+      previewUrl: imageUrl,
+    });
+    setimagePreview(validFile);
+  };
 
   const updateBio = (username, bio, image) => {
     console.log("updating profile");
@@ -62,8 +90,8 @@ export default function Profile() {
         <div className="fixed inset-0 bg-black opacity-50 z-10"></div>
       )}
       {ChangeImageIcon && (
-        <div className="fixed bg-white shadow-md rounded-xl  xs:w-[80%] xs:h-[40%] md:w-[65%] md:h-[30%] sm:w-[70%] sm:h-[30%] lg:w-[42%] lg:h-[50%]  p-4 z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-          <div className="  flex items-center relative w-full h-[22%]">
+        <div className="fixed bg-white shadow-md rounded-xl  xs:w-[80%] xs:h-[60%] md:w-[65%] md:h-[50%] sm:w-[70%] sm:h-[30%] lg:w-[42%] lg:h-[63%]  p-4 z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+          <div className="  flex items-center relative w-full h-[18%]">
             <p className="xs:text-2xl sm:text-3xl md:text-3xl lg:text-3xl absolute left-5">
               Update Profile Image
             </p>
@@ -105,7 +133,38 @@ export default function Profile() {
               />
             </div>
           )}
-          {selected == "Image Upload" && <div className="w-full h-[70%]"></div>}
+          {selected == "Image Upload" && imagePreview.length == 0 && (
+            <div
+              className="bg-gray-100 mt-1 w-full h-[50%] flex items-center justify-center border-2 border-dashed border-gray-300 rounded-xl cursor-pointer"
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              <p className="text-black">
+                Drag and drop an image here, or click to upload
+              </p>
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={handleFileChange}
+              />
+            </div>
+          )}
+          {selected == "Image Upload" && imagePreview.length == 1 && (
+            <div className="mt-1 bg-gray-100 w-full h-[60%] flex items-center justify-center border-2 rounded-xl">
+              <div className="rounded-full h-[200px] w-[200px]  overflow-hidden flex items-center justify-center">
+                {imagePreview.length > 0 && (
+                  <img
+                    src={imagePreview[0].previewUrl}
+                    className="h-full w-full object-cover"
+                    alt="Profile preview"
+                  />
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

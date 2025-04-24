@@ -1,58 +1,56 @@
 .user-card {
-    color: white;
-    width: 400px;
-    height: 100%;
-    background-color: rgb(27, 125, 229);
-    padding: 60px 40px;
-    text-align: center;
-    float: left;
+  color: white;
+  width: 400px;
+  height: 100%;
+  background-color: rgb(27, 125, 229);
+  padding: 60px 40px;
+  text-align: center;
+  float: left;
 }
 
 .profilePicture {
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
-    margin: 0 auto;
-    
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  margin: 0 auto;
 }
 
 .username {
-    font-size: 2.25em;
-    font-weight: bolder;
-    display: inline;
-    overflow-x: hidden;
-    text-overflow: ellipsis;  
+  font-size: 2.25em;
+  font-weight: bolder;
+  display: inline;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .edit {
-    color:black;
+  color: black;
 }
 
 .bio {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .editButton {
-    height: 50px;
-    width: 50px;
-    margin-left: 300px;
-    margin-top: -50px;
+  height: 50px;
+  width: 50px;
+  margin-left: 300px;
+  margin-top: -50px;
 }
 
 .editButton:hover {
-    background-color: blue;
-    scale: 1.1;
+  background-color: blue;
+  scale: 1.1;
 }
 
-
 .editButton:active {
-    transform: scale(0.8);
+  transform: scale(0.8);
 }
 
 .description {
-    font-size: 85%;
-    margin: 0px -10px;
-    padding: 10px 0;
-    word-wrap: break-word;
+  font-size: 85%;
+  margin: 0px -10px;
+  padding: 10px 0;
+  word-wrap: break-word;
 }
 
