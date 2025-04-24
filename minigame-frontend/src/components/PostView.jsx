@@ -59,7 +59,7 @@ const PostView = ({post, username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/
                         {username}
                     </Popup>
 
-                    <p className="bg-[#DEE7FB] grow p-2 overflow-y-auto hide-scrollbar">
+                    <p className="bg-[#DEE7FB] grow p-2 text-2xl overflow-y-auto hide-scrollbar">
                         {post.body}
                     </p>
                 </div>
