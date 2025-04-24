@@ -132,10 +132,11 @@ const PostControllers = {
             isDelete: false,
           };
 
-      const listPosts = await PostModel.find(postFilter);
+      let listPosts = await PostModel.find(postFilter);
 
       if (listPosts.length === 0) {
-        throw new Error("No posts by this user found!");
+        // throw new Error("No posts by this user found!");
+        listPosts = []
       }
 
       res.status(201).send({

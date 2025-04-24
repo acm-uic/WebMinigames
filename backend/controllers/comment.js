@@ -105,10 +105,11 @@ const CommentControllers = {
         ? { postId: postId }
         : { postId: postId, isDelete: false };
 
-      const listComments = await CommentModel.find(commentFilter);
+      let listComments = await CommentModel.find(commentFilter);
 
       if (listComments.length === 0) {
-        throw new Error("No comments in this post!");
+        // throw new Error("No comments in this post!");
+        listComments = [];
       }
 
       res.status(201).send({
