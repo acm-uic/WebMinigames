@@ -3,7 +3,7 @@ import { useState } from "react"
 import Popup from "./Popup.jsx"
 import ProfilePopup from "./ProfilePopup.jsx"
 
-const PostView = ({authorId="", username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", title="Untitled Post", body="Nothing here...", imgs, className }) => {
+const PostView = ({postId, authorId="", username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg", title="Untitled Post", body="Nothing here...", imgs, className }) => {
     const [imgIndex, setImgIndex] = useState(0)
 
     /* Format all given images
@@ -45,7 +45,7 @@ const PostView = ({authorId="", username="Guest", icon="https://t4.ftcdn.net/jpg
     return (
         <div className={`${className} flex flex-col lg:w-3/4 w-full h-[350px] p-2 pt-0 bg-[#5B6EE1] m-auto`}>
             <div className="text-[20px] font-semibold text-white italic tracking-widest">
-                <Link to="/post">{title}</Link>
+                <Link to={`/post/${postId}`}>{title}</Link>
                 <div className="size-[20px] mt-[5px] border border-black rounded-sm bg-[#D95763] float-right"></div>
             </div>
 

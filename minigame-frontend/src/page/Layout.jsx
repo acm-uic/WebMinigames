@@ -20,13 +20,16 @@ const Layout = () => {
     }
   };
 
-  const currentLocation = useLocation();
+  let currentLocation = useLocation();
+  currentLocation = currentLocation.pathname.replace(/\/$/, '');
+
+  const disableCreate = (currentLocation == "/create-post" || currentLocation == "/create-game" || currentLocation == "/post")
 
   return (
     <>
       <nav className="bg-blue-600 p-1 h-[60px] w-full">
           <Link to="/create-post">
-            <div className={`z-50 fixed bottom-4 right-4 font-bold bg-slate-400 w-fit h-fit p-4 rounded-lg border-r-4 cursor-pointer ${currentLocation.pathname == "/create-post" || currentLocation.pathname == "/create-game" ? "hidden" : ""}`}>
+            <div className={`z-50 fixed bottom-4 right-4 font-bold bg-slate-400 w-fit h-fit p-4 rounded-lg border-r-4 cursor-pointer ${disableCreate ? "hidden" : ""}`}>
                 <button>Create Post +</button>
             </div>
           </Link>

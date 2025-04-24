@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CommentSection from '../components/CommentSection';
+import { SiteContext } from '../domain/SiteContext';
+import { useParams } from 'react-router-dom';
+import PostView from '../components/PostView';
 
 const Post = ({ Post }) => {
+    const {serverURL} = useContext(SiteContext);
+    let params = useParams();
+
+    const [currPost, setCurrPost] = useState(null);
     const [buttonState, setButtonState] = useState(0);
     
     function handleCommentsMenu(iState){
@@ -14,11 +21,31 @@ const Post = ({ Post }) => {
         //console.log(buttonState); //debug that prints the comments section state
     }
 
+    useEffect(() => {
+        const fetchPost = async () => {
+          const response = await fetch(`${serverURL}/api/public/posts/get?postId=${params.postId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+    
+          if (!response.ok) {
+            console.error(response);
+            return false;
+          }
+          const res = await response.json();
+          console.log(res);
+          setCurrPost(res.data[0]);
+        }
+    
+        fetchPost();
+      }, [])
+
     return (
         <div>
             <div className="w-full bg-white-500 h-[700px] border-y-2 border-black relative flex flex-col justify-center">
-                {React.cloneElement(Post, { className: "lg:w-full h-[90%]" })}
-                {/* <PostView className="lg:w-full h-[90%]" /> */}
+                {currPost && <PostView authorId={currPost.author} username='' icon='' title={currPost.title} body={currPost.body} imgs={currPost.images}/>}
             </div>
             <div className="w-full bg-[#DAE7FD] h-[50px] flex flex-row justify-center">
                 <div
