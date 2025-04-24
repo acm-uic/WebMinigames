@@ -11,8 +11,6 @@ import { UserContextProvider } from "./domain/UserContext.jsx";
 
 import "./index.css";
 import Contributors from "./page/Contributors.jsx";
-import GameDetails from "./components/GameDetails.jsx";
-import PostView from "./components/PostView.jsx";
 import Post from "./page/Post.jsx";
 import PostViewPage from "./page/PostViewPage.jsx";
 import { SiteContextProvider } from "./domain/SiteContext.jsx";
@@ -45,14 +43,11 @@ export default function App() {
                 <Route path="all-games" element={<AllGames />} />
                 <Route path="profile/"  element={<Profile />} />
                 <Route path="profile/:userId"  element={<Profile />} />
-                <Route path="game" element={<GamePage />} />
-                <Route
-                  path="game-details"
-                  element={<GameDetails game={exampleGame} />}
-                />
+                {/* <Route path="game" element={<GamePage />} /> */}
+                {/* <Route path="game-details" element={<GameDetails game={exampleGame} />} /> */}
                 <Route path="post/" element={<PostViewPage />} />
                 <Route path="post/:postId" element={<Post  />} />
-              <Route path="create-post" element={<PostViewPage />} />
+                <Route path="create-post" element={<PostViewPage />} />
               </Route>
             </Routes>
           </BrowserRouter>

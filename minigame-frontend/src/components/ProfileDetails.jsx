@@ -22,7 +22,7 @@ export function ProfileDetails(props) {
           (
             <>
             {posts.map((post,index) => (
-              <PostView key={"profile-"+post._id +index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
+              <PostView key={"profile-"+post._id +index} post={{postId:post._id, authorId:post.authorId, title:post.title, body:post.body, imgs:post.images}} />
             ))}
             </>
           )

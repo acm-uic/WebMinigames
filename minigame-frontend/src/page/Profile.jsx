@@ -14,7 +14,14 @@ export default function Profile() {
 
   const [isOwnedAccound, setIsOwnedAccound] = useState(!params.userId || params.userId == userId);
 
-  const [currUserId, setCurrUserId] = useState(params.userId ? params.userId : userId); // TODO set user ID
+  const [currUserId, setCurrUserId] = useState(() => {
+    if (params.userId && params.userId != undefined) {
+      return params.userId;
+    } else {
+      return userId;
+    }
+  });
+  const [currUser, setCurrUser] = useState(null);
   const [currUserPosts, setCurrUserPosts] = useState([]);
   const [editing, setEditing] = useState(false);
   const updateBio = (username, bio, image) => {
@@ -27,11 +34,16 @@ export default function Profile() {
     setEditing((prev)=> !prev);
   }
 
-  
-
   useEffect(() => {
-    const fetchUserPosts = async () => {
-      const response = await fetch(`${serverURL}/api/public/posts/get?userId=${currUserId}`, {
+    setCurrUserId(() => {
+      if (params.userId && params.userId != undefined) {
+        return params.userId;
+      } else {
+        return userId;
+      }
+    });
+    const fetchUser = async () => {
+      const response = await fetch(`${serverURL}/api/public/users/get/${currUserId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -44,11 +56,34 @@ export default function Profile() {
       }
       const res = await response.json();
       console.log(res);
+      setCurrUser(res.data[0]);
+    }
+
+    const fetchUserPosts = async () => {
+      // TODO have server return 204 instead of 500
+      const response = await fetch(`${serverURL}/api/public/posts/get?userId=${currUserId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const res = await response.json();
+        console.log(res.message);
+        return false;
+      }
+      const res = await response.json();
+      console.log(res);
       setCurrUserPosts(res.data);
     }
 
+    if (currUserId == "") {
+      return;
+    }
+    fetchUser();
     fetchUserPosts();
-  }, [])
+  }, [currUserId, params.userId, userId])
 
   return (
     <div>

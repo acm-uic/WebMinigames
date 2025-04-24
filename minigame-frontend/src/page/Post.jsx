@@ -4,11 +4,11 @@ import { SiteContext } from '../domain/SiteContext';
 import { useParams } from 'react-router-dom';
 import PostView from '../components/PostView';
 
-const Post = ({ Post }) => {
+const Post = () => {
     const {serverURL} = useContext(SiteContext);
     let params = useParams();
 
-    const [currPost, setCurrPost] = useState(null);
+    const [post, setPost] = useState(null);
     const [buttonState, setButtonState] = useState(0);
     
     function handleCommentsMenu(iState){
@@ -36,7 +36,7 @@ const Post = ({ Post }) => {
           }
           const res = await response.json();
           console.log(res);
-          setCurrPost(res.data[0]);
+          setPost(res.data[0]);
         }
     
         fetchPost();
@@ -45,7 +45,7 @@ const Post = ({ Post }) => {
     return (
         <div>
             <div className="w-full bg-white-500 h-[700px] border-y-2 border-black relative flex flex-col justify-center">
-                {currPost && <PostView authorId={currPost.author} username='' icon='' title={currPost.title} body={currPost.body} imgs={currPost.images}/>}
+                {post && <PostView  post={{postId:params.postId, authorId:post.author, title:post.title, body:post.body, imgs:post.images}} />}
             </div>
             <div className="w-full bg-[#DAE7FD] h-[50px] flex flex-row justify-center">
                 <div

@@ -49,3 +49,17 @@ export const SiteContextProvider = ({children}) => {
 //   "updatedAt": "2025-04-08T02:27:26.948Z",
 //   "__v": 0
 // }
+
+/*
+USER FORMAT
+{
+  "_id": "67fd4c52d48a2d12c6320ae1",
+  "email": "fake@uic.com",
+  "userName": "Profile test",
+  "role": "User",
+  "bio": "Nothing here yet.",
+  "avatar": "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg",
+  "likedGames": [],
+  "interests": []
+}
+*/

@@ -55,7 +55,7 @@ export const UserContextProvider = ({ children }) => {
     const res = await response.json();
     console.log(res);
     setIsLoggedIn(true);
-    setUserId(res.data._id);
+    setUserId(res.data.user._id);
     setUsername(res.data.user.userName);
     setAccessToken(res.data.accessToken);
     setRefreshToken(res.data.refreshToken);
