@@ -19,4 +19,11 @@ UserPublicRoute.post(
   UserControllers.signinUser
 );
 
+// Get user info
+UserPublicRoute.get(
+  "/get/:userId",
+  UserMiddlewares.getUserInfo,
+  UserControllers.getUserInfo
+);
+
 export default UserPublicRoute;

@@ -14,4 +14,32 @@ UserPrivateRoute.put(
   UserControllers.updateProfile
 );
 
+UserPrivateRoute.post(
+  "/likeGame",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.likeGame,
+  UserControllers.likeGame
+);
+
+UserPrivateRoute.post(
+  "/addInterest",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.addInterest,
+  UserControllers.addInterest
+);
+
+UserPrivateRoute.delete(
+  "/unlikeGame",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.unlikeGame,
+  UserControllers.unlikeGame
+);
+
+UserPrivateRoute.delete(
+  "/removeInterest",
+  AuthMiddlewares.verifyAccessToken,
+  UserMiddlewares.removeInterest,
+  UserControllers.removeInterest
+);
+
 export default UserPrivateRoute;

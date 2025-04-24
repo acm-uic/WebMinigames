@@ -48,7 +48,7 @@ const UserControllers = {
       res.status(201).send({
         message: "User created successfully",
         success: true,
-        data: {user:newUser},
+        data: { user: newUser },
       });
     } catch (error) {
       res.status(409).send({
@@ -177,6 +177,149 @@ const UserControllers = {
       });
     } catch (error) {
       res.status(500).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  getUserInfo: async (req, res) => {
+    try {
+      // Get the userId
+      const { userId } = req.params;
+
+      // Check if user exist
+      const crrUser = await UserModel.findById(userId);
+
+      // If does not exist user
+      if (!crrUser) throw new Error("Cannot find user");
+
+      const user = {
+        _id: crrUser._id,
+        email: crrUser.email,
+        userName: crrUser.userName,
+        role: crrUser.role,
+        bio: crrUser.bio,
+        avatar: crrUser.avatar,
+        likedGames: crrUser.likedGames,
+        interests: crrUser.interests,
+      };
+
+      res.status(201).send({
+        message: "Here is this user info!",
+        success: true,
+        data: user,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  likeGame: async (req, res) => {
+    try {
+      // Get the userId
+      const { game } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $addToSet: { likedGames: game } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Game liked successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  unlikeGame: async (req, res) => {
+    try {
+      // Get the userId
+      const { game } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $pull: { likedGames: game } },
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Game unliked successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  addInterest: async (req, res) => {
+    try {
+      // Get the userId
+      const { interest } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $addToSet: { interests: interest } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Interest added successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  removeInterest: async (req, res) => {
+    try {
+      // Get the userId
+      const { interest } = req.body;
+      const { user } = req;
+
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        { $pull: { interests: interest } }, // prevents duplicates
+        { new: true }
+      );
+
+      if (!updatedUser) throw new Error("Cannot find user!");
+
+      res.status(200).send({
+        message: "Interest removed successfully!",
+        success: true,
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
         message: error.message,
         success: false,
         data: null,

@@ -30,6 +30,14 @@ const UserSchema = mongoose.Schema({
     required: true,
     default: "User",
   },
+  likedGames: {
+    type: [String],
+    default: [],
+  },
+  interests: {
+    type: [String],
+    default: [],
+  },
 });
 
 // Creating a user model

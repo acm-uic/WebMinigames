@@ -57,6 +57,84 @@ const UserMiddlewares = {
       });
     }
   },
+  getUserInfo: (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      if (!userId) throw new Error("Please enter userId!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  likeGame: (req, res, next) => {
+    try {
+      // Get the game name
+      const { game } = req.body;
+      // Give an error if missing any information
+      if (!game) throw new Error("Please enter game!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  unlikeGame: (req, res, next) => {
+    try {
+      // Get the game name
+      const { game } = req.body;
+      // Give an error if missing any information
+      if (!game) throw new Error("Please enter game!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  addInterest: (req, res, next) => {
+    try {
+      // Get the interest
+      const { interest } = req.body;
+      // Give an error if missing any information
+      if (!interest) throw new Error("Please enter interest!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
+  removeInterest: (req, res, next) => {
+    try {
+      // Get the interest
+      const { interest } = req.body;
+      // Give an error if missing any information
+      if (!interest) throw new Error("Please enter interest!");
+
+      return next();
+    } catch (error) {
+      res.status(400).send({
+        message: error.message,
+        success: false,
+        data: null,
+      });
+    }
+  },
 };
 
 export default UserMiddlewares;
