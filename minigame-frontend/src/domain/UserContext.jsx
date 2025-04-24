@@ -91,6 +91,38 @@ export const UserContextProvider = ({ children }) => {
     return true;
   };
 
+  const createPost = async (title, body, media) => {
+    // Create form data
+    const formData = new FormData();
+    formData.append('user', JSON.stringify({ _id: userId, userName: username }));
+    formData.append('title', title);
+    formData.append('body', body);
+
+    // Append images to the form data
+    Array.from(media).forEach((file) => {
+      formData.append('images', file);
+    });
+
+    console.log({_id:userId, userName: username}, { title:title, body:body }, {media: media})
+    const response = await fetch(`${serverURL}/api/private/posts/create`, {
+      method: "POST",
+      headers: {
+        authorization: accessToken,
+      },
+      body: formData
+    });
+
+    const res = await response.json();
+    if (!response.ok) {
+      console.error(res.message);
+      return false;
+    }
+    console.log(res);
+    console.log("post created successfully");
+
+    return true;
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -103,6 +135,7 @@ export const UserContextProvider = ({ children }) => {
         loginUser,
         isLoggedIn,
         updateProfile,
+        createPost
       }}
     >
       {children}

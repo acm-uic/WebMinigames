@@ -38,7 +38,8 @@ export default function Homepage () {
       }
       const res = await response.json();
       console.log(res);
-      setAllPosts(res.data);
+      const reversedPosts = res.data.reverse();
+      setAllPosts(reversedPosts);
     }
 
     fetchAllPosts();

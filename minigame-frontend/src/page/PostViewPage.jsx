@@ -1,8 +1,9 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useContext } from "react";
 import { GoXCircle } from "react-icons/go";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import Editor from "../page/Editor";
 
+import { useNavigate } from "react-router-dom";
 import {
   FaCloudUploadAlt,
   FaTimes,
@@ -10,8 +11,10 @@ import {
   FaArrowRight,
   FaBars,
 } from "react-icons/fa";
+import { UserContext } from "../domain/UserContext";
 
 export default function PostViewPage() {
+  const { createPost } = useContext(UserContext);
   const editorStateRef = useRef(undefined);
 
   const [title, setTitle] = useState("");
@@ -31,6 +34,8 @@ export default function PostViewPage() {
   const [draggedIndex, setDraggedIndex] = useState(null);
   // const [files, setFiles] = useState([]);
 
+  const navigate = useNavigate();
+
   {
     /* EXAMPLE CODE FOR GAMES TO ADD TAGS AND FILES FOR MEDIA */
   }
@@ -42,18 +47,8 @@ export default function PostViewPage() {
     "Modern Warfare": { categories: ["Shooting", "FPS"] },
     "GTA 5": { categories: ["Action", "Free Roam"] },
   };
-  const exampleFile1 = {
-    file: { type: "image/" },
-    previewUrl:
-      "https://media.contentapi.ea.com/content/dam/walrus/en-gb/migrated-images/2017/04/reveal-swbf2-fb-meta-image-alt.png.adapt.crop191x100.1200w.png", // Example placeholder image URL
-  };
-  const exampleFile2 = {
-    file: { type: "video/mp4" },
-    previewUrl:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-  };
 
-  const [files, setFiles] = useState([exampleFile1, exampleFile2]);
+  const [files, setFiles] = useState([]);
   {
     /*------------------------------------------------------------------------------ */
   }
@@ -129,7 +124,7 @@ export default function PostViewPage() {
     document.getElementById("fileInput").click();
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (selectedTags.length === 0) {
       setTagError("You need to add at least one tag");
     } else {
@@ -165,11 +160,23 @@ export default function PostViewPage() {
       files,
       editorStateContent,
     };
-
-    setTitle("");
-    setFiles([]);
-    setSelectedTags([]);
-    setPosted(!posted);
+    const bodyText = editorStateContent.root.children[0].children[0].text;
+    const postFiles = postData.files.map((media) => media.file);
+    const status = await createPost(postData.title, bodyText, postFiles);
+    
+    if (status) {
+      setTitle("");
+      setFiles([]);
+      setSelectedTags([]);
+      setPosted(!posted);
+      
+      // Use navigate instead of window.location.href
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 1000); // Adjust the delay as needed
+    } else {
+      alert("Failed to create post. Please try again.");
+    }
   };
 
   const getVideo = (file) => {
@@ -313,7 +320,10 @@ export default function PostViewPage() {
           {selectedTags.length > 0 && (
             <>
               {[...selectedTags].map((tag) => (
-                <div className="relative flex items-center justify-center  p-2 h-[32px] rounded-full ">
+                <div
+                  key={tag}
+                  className="relative flex items-center justify-center  p-2 h-[32px] rounded-full "
+                >
                   <button className="rounded-full tx-sm bg-gray-300 w-auto h-auto p-1 pl-2 pr-2">
                     {tag}
                   </button>
@@ -386,9 +396,9 @@ export default function PostViewPage() {
               type="file"
               id="fileInput"
               className="hidden"
-              accept="image/*,video/*"
-              onChange={handleFileChange}
               multiple
+              accept="image/*" //,video/* re add when videos working
+              onChange={handleFileChange}
             />
             {files.length > 0 ? (
               <div className="relative w-full h-full flex justify-center items-center">
@@ -445,7 +455,7 @@ export default function PostViewPage() {
               </div>
             ) : (
               <div className="  w-full flex flex-col items-center">
-                <p className="text-black text-xl mb-2">Add an image/video</p>
+                <p className="text-black text-xl mb-2">Add images</p>
                 <div className=" w-[100%] h-[100%] flex justify-center">
                   <FaCloudUploadAlt
                     onClick={handleIconClick}
@@ -578,4 +588,3 @@ export default function PostViewPage() {
     </div>
   );
 }
-

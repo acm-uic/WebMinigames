@@ -7,7 +7,7 @@ const PostControllers = {
     try {
       const { user } = req;
       const { title, body } = req.body;
-      const listFile = req.images;
+      const listFile = req.files;
 
       const listMedia = [];
 
