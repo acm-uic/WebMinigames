@@ -16,8 +16,6 @@ export function HeroComponent(props) {
             imageLink="https://images.frandroid.com/wp-content/uploads/2021/05/fortnite-saison-6.jpg"
             text="Fortnite is an MMO game on most major gaming consoles and PC that invites players to eliminate one another with weapons in 1-on-1 or teams combat!"
         />
-        <ShowcaseGameCardComponent />
-
       </div>
     </div>
   );
