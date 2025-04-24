@@ -6,6 +6,7 @@ import Homepage from "./page/Homepage.jsx";
 import AllGames from "./page/AllGames.jsx";
 import Profile from "./page/Profile.jsx";
 import GamePage from "./page/GamePage.jsx";
+import CreateGame from "./page/CreateGame.jsx";
 
 import { UserContextProvider } from "./domain/UserContext.jsx";
 
@@ -45,6 +46,7 @@ export default function App() {
               <Route path="all-games" element={<AllGames />} />
               <Route path="profile" element={<Profile />} />
               <Route path="game" element={<GamePage />} />
+              <Route path="create-game" element={<CreateGame />} />
               <Route
                 path="game-details"
                 element={<GameDetails game={exampleGame} />}
