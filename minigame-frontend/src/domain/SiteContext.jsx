@@ -31,8 +31,21 @@ export const SiteContextProvider = ({children}) => {
 
 
   return (
-    <SiteContext.Provider value={{allGames, fetchAllGames}}>
+    <SiteContext.Provider value={{allGames, fetchAllGames, serverURL}}>
       {children}
     </SiteContext.Provider>
   )
 }
+
+// POST FORMAT
+// {
+//   "_id": "67e2386fecbcc4663cdbb595",
+//   "author": "67be56067df243b286767045",
+//   "title": "Dreams",
+//   "body": "Visit Old Trafford next year",
+//   "images": [],
+//   "isDelete": false,
+//   "createdAt": "2025-03-25T05:00:31.642Z",
+//   "updatedAt": "2025-04-08T02:27:26.948Z",
+//   "__v": 0
+// }

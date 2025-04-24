@@ -63,30 +63,29 @@
     text-overflow: ellipsis;
 }
 
-.interests-link {
+.profile-nav {
     width: 250px;
     height: 40px;
     margin: 0px 20px;
     font-size: 2em;
     display: inline-block;
     text-align: center;
-    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profile-nav:hover {
+    color: rgb(0, 0, 0);
     font-weight: bolder;
-    
+    transform: scale(1.1);
+}
+
+.profile-nav.active {
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.interests-link {
 }
 
 .posts-link {
-    width: 250px;
-    height: 40px;
-    margin: 0px 20px;
-    font-size: 2em;
-    display: inline-block;
-    text-align: center;
-}
-
-.posts-link:hover {
-    color: rgb(0, 0, 0);
-    font-weight: bolder;
-    text-decoration: underline;
-    transform: scale(1.1);
 }

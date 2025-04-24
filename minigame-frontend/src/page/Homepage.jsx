@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GameRowComponent } from "../components/GameRowComponent.jsx";
 import { HeroComponent } from '../components/HeroComponent.jsx';
 import PostView from "../components/PostView.jsx";
+import { SiteContext } from '../domain/SiteContext.jsx';
 
 export default function Homepage () {
+  const {serverURL} = useContext(SiteContext);
   const exampleGame = {
     name: "Fortnite",
     cover: "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
@@ -18,6 +20,30 @@ export default function Homepage () {
     releaseDate: new Date().toUTCString(),
     links: ["https://www.youtube.com/"]
   }
+
+  const [allPosts, setAllPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+      const response = await fetch(`${serverURL}/api/public/posts/getAll`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.error(response);
+        return false;
+      }
+      const res = await response.json();
+      console.log(res);
+      setAllPosts(res.data);
+    }
+
+    fetchAllPosts();
+  }, [])
+
   return (
     <div>
       {/* Create a "Hero Component" -  the Popular games and see 
@@ -30,7 +56,11 @@ export default function Homepage () {
       <HeroComponent />
       {/* <GameDetailsPopUp game={exampleGame}/> */}
 
+        {allPosts.map((post,index) => (
+          <PostView key={post.id + index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
+        ))}
       <PostView imgs={["https://steamuserimages-a.akamaihd.net/ugc/273968969351308719/A642CC447714B0B1F2F927C1738A9C262308E7B0/?imw=128&imh=128&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true", "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"]} />
     </div>
   )
 }
+
