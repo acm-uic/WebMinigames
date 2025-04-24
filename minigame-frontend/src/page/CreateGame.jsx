@@ -104,6 +104,12 @@ export default function CreateGame() {
       setSourceError("");
     }
 
+    if (files.length === 0) {
+      setFileError("Please add at least one image for the game cover photo");
+    } else {
+      setFileError("");
+    }
+
     if (
       editorStateRef.current === undefined ||
       editorStateRef.current.toJSON().root.children[0].children.length == 0
@@ -115,6 +121,11 @@ export default function CreateGame() {
 
     if (
       gameName.length === 0 ||
+      publisher.length === 0 ||
+      developer.length === 0 ||
+      releaseDate.length === 0 ||
+      source.length === 0 ||
+      files.length === 0 ||
       editorStateRef.current === undefined ||
       editorStateRef.current.toJSON().root.children[0].children.length == 0
     ) {
@@ -132,6 +143,10 @@ export default function CreateGame() {
     };
 
     setGameName("");
+    setPublisher("");
+    setDeveloper("");
+    setReleaseDate("");
+    setSource("");
     setFiles([]);
     setPosted(!posted);
   };
