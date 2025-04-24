@@ -18,13 +18,15 @@ export function ProfileDetails(props) {
         Posts
       </h1>
       <div className="details-card">
-        {view == "posts" && (
-          <>
-          {posts.map((post,index) => (
-            <PostView key={post.id + index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
-          ))}
-          </>
-        )}
+        {view == "posts" && (posts.length == 0 ? "User has no posts" :
+          (
+            <>
+            {posts.map((post,index) => (
+              <PostView key={post.id + index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
+            ))}
+            </>
+          )
+        ) }
         {view == "interests" && (
           <>
             <div>
