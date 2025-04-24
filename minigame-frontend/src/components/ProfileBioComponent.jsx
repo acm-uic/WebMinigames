@@ -57,10 +57,3 @@ export function ProfileBioComponent(props) {
     }
     
 }
-
-// ProfileBioComponent.defaultProps = {
-//     imageLink: "https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg",
-//     user: "username12345",
-//     bio: "asdadasadasfasdfasdaswerfwfwferrefwerewrwerererwrewercaddcapocmevimoasmv aoimacviocsdasdrandom paragraphs can be an excellent way",
-//     isSignedIn: false
-// }
