@@ -11,7 +11,7 @@ const PostView = ({post, username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/
         If a link or an array of length 1, image will be displayed
         If an array of more than one image, images will be displayed as a carousel */
     const displayImgs = () => {
-        if (post.imgs == null)
+        if (post.imgs == null || post.imgs.length == 0)
             return
         else if (Array.isArray(post.imgs) && post.imgs.length > 1) {
             return (
