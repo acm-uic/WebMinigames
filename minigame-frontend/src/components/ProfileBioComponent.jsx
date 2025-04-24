@@ -2,17 +2,17 @@ import "./css/ProfileBio.css";
 import { useEffect, useState } from "react";
 
 export function ProfileBioComponent(props) {
-    const { imageLink, user, bio,handleEdit, updateBio, canEdit, editing } = props;
-    const [newImageLink, setNewImageLink] = useState(imageLink);
-    const [newUser, setnewUser] = useState(user);
-    const [newBio, setNewBio] = useState(bio);
+    const { user,handleEdit, updateBio, canEdit, editing } = props;
+    const [newImageLink, setNewImageLink] = useState(user.avatar);
+    const [newUser, setnewUser] = useState(user.userName);
+    const [newBio, setNewBio] = useState(user.bio);
     useEffect(()=> {
         if (!editing) {
-            setNewImageLink(imageLink);
-            setNewBio(bio);
-            setnewUser(user);
+            setNewImageLink(user.avatar);
+            setNewBio(user.bio);
+            setnewUser(user.userName);
         }
-    }, [user, bio, imageLink])
+    }, [editing, user])
 
     if (!editing) {
         return (
@@ -22,13 +22,13 @@ export function ProfileBioComponent(props) {
                         src="https://cdn-icons-png.flaticon.com/512/4226/4226577.png"
                         alt="Edit icon" /></button> : ""}
                 </div>
-                <img className="profilePicture" src={imageLink}
+                <img className="profilePicture" src={user.avatar}
                     alt="Profile Picture" />
     
-                    <h1 className="username">{user}</h1>
+                    <h1 className="username">{user.userName}</h1>
                 <h2 className="bio">biography</h2>
                 <br></br>
-                <p className="description">{bio}</p>
+                <p className="description">{user.bio}</p>
                 <br></br>
             </div>
         );
@@ -42,11 +42,14 @@ export function ProfileBioComponent(props) {
                 </div>
                 <img className="profilePicture" src={newImageLink} alt="Profile Picture" />
                 <input className="edit" type="text" value={newImageLink} onChange={() => setNewImageLink(event.target.value)}/>
-                <h1 className="username">{user}</h1>
+                <br/>
+                <h1 className="username">{user.userName}</h1>
+                <br/>
                 <input className="username edit" type="text" value={newUser} onChange={() => setnewUser(event.target.value)}/>
+                <br/>
                 <h2 className="bio">biography</h2>
                 <br></br>
-                <p className="description">{bio}</p>
+                <p className="description">{user.bio}</p>
                 <textarea className="description edit" value={newBio} onChange={() => setNewBio(event.target.value)} />
                 <br></br>
             </div>
