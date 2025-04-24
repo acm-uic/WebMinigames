@@ -123,8 +123,7 @@ const LoginModal = ({ onClose }) => {
     formMode === "Sign in" ? "Don't have an account？" : "Have an account？";
 
   return (
-    <div
-      className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black/50 z-50 flex justify-center items-center">
       <div
         className="w-full max-w-lg p-8 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl relative animate-fade-in"
         onClick={(e) => e.stopPropagation()}>

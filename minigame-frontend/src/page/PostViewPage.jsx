@@ -14,7 +14,7 @@ import {
 import { UserContext } from "../domain/UserContext";
 
 export default function PostViewPage() {
-  const { createPost } = useContext(UserContext);
+  const { createPost, isLoggedIn } = useContext(UserContext);
   const editorStateRef = useRef(undefined);
 
   const [title, setTitle] = useState("");
@@ -35,6 +35,13 @@ export default function PostViewPage() {
   // const [files, setFiles] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setTimeout(() => {alert("You need to login!"); document.getElementById("login-nav").click()}, 1000)
+      ;
+    }
+  })
 
   {
     /* EXAMPLE CODE FOR GAMES TO ADD TAGS AND FILES FOR MEDIA */

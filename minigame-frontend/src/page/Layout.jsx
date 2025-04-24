@@ -72,7 +72,7 @@ const Layout = () => {
                   </svg>
                 </Link>
               ) : (
-                <div onClick={handleProfileClick} className="cursor-pointer">
+                <div id="login-nav" onClick={handleProfileClick} className="cursor-pointer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
