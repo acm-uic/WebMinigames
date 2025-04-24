@@ -43,7 +43,7 @@ const PostView = ({post, username="Guest", icon="https://t4.ftcdn.net/jpg/02/15/
    
     /* Post View Div */
     return (
-        <div className={`${className} flex flex-col lg:w-3/4 w-full h-[350px] p-2 pt-0 bg-[#5B6EE1] m-auto`}>
+        <div className={`${className} flex flex-col lg:w-3/4 w-full h-[350px] p-2 pt-0 bg-[#5B6EE1] mt-4 m-auto`}>
             <div className="text-[20px] font-semibold text-white italic tracking-widest">
                 <Link to={`/post/${post.postId}`}>{post.title}</Link>
                 <div className="size-[20px] mt-[5px] border border-black rounded-sm bg-[#D95763] float-right"></div>
