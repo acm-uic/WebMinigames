@@ -4,15 +4,16 @@ import { useContext, useState, useRef } from "react";
 import { ProfileBioComponent } from "../components/ProfileBioComponent.jsx";
 import { ProfileDetails } from "../components/ProfileDetails.jsx";
 import { GoXCircle } from "react-icons/go";
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { FaCloudUploadAlt, FaTimes } from "react-icons/fa";
 import "./profile.css";
+// bg-gray-100 xs:bg-green-300 xsm:bg-red-300 sm:bg-yellow-200 md:bg-purple-800 lg:bg-pink-300 xl:bg-orange-600
 
 export default function Profile() {
   const { username, profileIcon, aboutMe, updateProfile, isLoggedIn } =
     useContext(UserContext);
   const [editing, setEditing] = useState(false);
   const [ChangeImageIcon, setChangeImageIcon] = useState(false);
-  const options = ["Embed Link", "Image Upload"];
+  const options = ["Image Upload"];
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [imagePreview, setimagePreview] = useState([]);
@@ -62,6 +63,10 @@ export default function Profile() {
     setSelected(option);
   };
 
+  const handleRemoveImage = () => {
+    setimagePreview([]);
+  };
+
   return (
     <div>
       <ProfileBioComponent
@@ -96,7 +101,9 @@ export default function Profile() {
               Update Profile Image
             </p>
             <GoXCircle
-              onClick={toggleTagPopup}
+              onClick={() => {
+                toggleTagPopup(), handleRemoveImage();
+              }}
               className="   xs:w-[10%] xs:h-[60%]  md:w-[20%] md:h-[50%] sm:w-[20%] sm:h-[75%]  lg:w-[12%] lg:h-[45%]  absolute right-1 cursor-pointer"
             />
           </div>
@@ -114,7 +121,9 @@ export default function Profile() {
                     key={option}
                     className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     onClick={() => {
-                      handleSelect(option), setIsOpen(!isOpen);
+                      handleSelect(option),
+                        setIsOpen(!isOpen),
+                        handleRemoveImage();
                     }}
                   >
                     {option}
@@ -131,6 +140,9 @@ export default function Profile() {
                 className="w-full mt-[30px] max-h-[50px]  lg:max-h-[40%] xs:max-h-[29%] text-gray-500 text-2xl xs:text-xl lg:text-2xl bg-gray-100  pl-1 rounded-md focus:outline-none resize-none"
                 placeholder="Link"
               />
+              <div className="bg-gray-200 mt-1 rounded-lg absolute bottom-[5%] right-[5%] items-center justify-center flex w-[15%] h-[8%]">
+                <button>Submit</button>
+              </div>
             </div>
           )}
           {selected == "Image Upload" && imagePreview.length == 0 && (
@@ -153,17 +165,29 @@ export default function Profile() {
             </div>
           )}
           {selected == "Image Upload" && imagePreview.length == 1 && (
-            <div className="mt-1 bg-gray-100 w-full h-[60%] flex items-center justify-center border-2 rounded-xl">
-              <div className="rounded-full h-[200px] w-[200px]  overflow-hidden flex items-center justify-center">
-                {imagePreview.length > 0 && (
-                  <img
-                    src={imagePreview[0].previewUrl}
-                    className="h-full w-full object-cover"
-                    alt="Profile preview"
-                  />
-                )}
+            <>
+              <div className="mt-1 bg-gray-400 w-full h-[60%] flex items-center justify-center border-2 rounded-xl">
+                {/* Delete Button */}
+                <button
+                  className=" absolute top-[32%] right-7 xsm:w-[5%] xsm:h-[5%] xs:w-[7%] sm:w-[5%] md:h-[3.5%] md:w-[4%] lg:w-[6.5%] lg:h-[7%] lg:max-h-[30px] xl:w-[3.8%] xl:h-[4%]   bg-red-500 text-white p-1 rounded-full shadow-md hover:bg-red-600"
+                  onClick={() => handleRemoveImage()}
+                >
+                  <FaTimes className="w-[100%] h-[100%]" />
+                </button>
+                <div className="rounded-full h-[200px] w-[200px]  overflow-hidden flex items-center justify-center">
+                  {imagePreview.length > 0 && (
+                    <img
+                      src={imagePreview[0].previewUrl}
+                      className="h-full w-full object-cover"
+                      alt="Profile preview"
+                    />
+                  )}
+                </div>
               </div>
-            </div>
+              <div className="bg-gray-200 mt-1 rounded-lg absolute right-[5%] items-center justify-center flex w-[18%] h-[8%]">
+                <button>Submit</button>
+              </div>
+            </>
           )}
         </div>
       )}

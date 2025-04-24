@@ -65,9 +65,9 @@ export function ProfileBioComponent(props) {
             />
           </button>
         </div>
-        <div className="flex items-center justify-center relative group bg-green-200">
+        <div className="flex items-center justify-center relative group ">
           <img
-            className=" bg-green-400 profilePicture "
+            className="  profilePicture "
             src={newImageLink}
             alt="Profile Picture"
           />
