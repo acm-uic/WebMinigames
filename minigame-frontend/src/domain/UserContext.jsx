@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { SiteContext } from "./SiteContext";
 
 export const UserContext = createContext();
 
@@ -15,7 +16,7 @@ export const UserContextProvider = ({ children }) => {
   const [favoriteGames, setFavoriteGames] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //"https://i.pinimg.com/736x/c6/25/f6/c625f6315130d8329a95ae27d8e95564.jpg"
-  const serverURL = import.meta.env.VITE_APP_SERVER_URL;
+  const {serverURL} = useContext(SiteContext);
   const createUser = async (userName, email, password, bio = "") => {
     userName = userName.trim();
     console.log({ userName, email, password, bio });

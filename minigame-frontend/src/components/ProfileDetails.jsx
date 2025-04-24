@@ -3,7 +3,7 @@ import { useState } from "react";
 import PostView from "./PostView";
 
 export function ProfileDetails(props) {
-  const { user, favorites, interests, posts } = props;
+  const { favorites, interests, posts } = props;
 
   const [view, setView] = useState("posts");
 
@@ -22,7 +22,7 @@ export function ProfileDetails(props) {
           (
             <>
             {posts.map((post,index) => (
-              <PostView key={post.id + index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
+              <PostView key={"profile-"+post._id +index} username='' icon='' profile='' title={post.title} body={post.body} imgs={post.images} />
             ))}
             </>
           )

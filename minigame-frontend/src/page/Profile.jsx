@@ -5,12 +5,16 @@ import { ProfileBioComponent } from "../components/ProfileBioComponent.jsx";
 import { ProfileDetails } from "../components/ProfileDetails.jsx";
 import "./profile.css";
 import { SiteContext } from '../domain/SiteContext.jsx';
+import { useParams } from 'react-router-dom';
 
 export default function Profile() {
   const {serverURL} = useContext(SiteContext);
-  const { username, profileIcon, aboutMe, updateProfile,isLoggedIn } = useContext(UserContext);
+  const {userId, username, profileIcon, aboutMe, updateProfile,isLoggedIn } = useContext(UserContext);
+  let params = useParams();
 
-  const [currUserId, setCurrUserId] = useState("67be56067df243b286767045"); // TODO set user ID
+  const [isOwnedAccound, setIsOwnedAccound] = useState(!params.userId || params.userId == userId);
+
+  const [currUserId, setCurrUserId] = useState(params.userId ? params.userId : userId); // TODO set user ID
   const [currUserPosts, setCurrUserPosts] = useState([]);
   const [editing, setEditing] = useState(false);
   const updateBio = (username, bio, image) => {
@@ -22,6 +26,8 @@ export default function Profile() {
   const handleEdit = () => {
     setEditing((prev)=> !prev);
   }
+
+  
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -51,7 +57,7 @@ export default function Profile() {
         user={username}
         bio={aboutMe}
         handleEdit={handleEdit}
-        canEdit={isLoggedIn}
+        canEdit={isOwnedAccound && isLoggedIn}
         editing={editing}
         updateBio={updateBio}
       />
@@ -59,7 +65,6 @@ export default function Profile() {
         posts={currUserPosts}
         favorites={["Fortnite", "Smash", "DBZ", "Halo", "Pokemon", "Warhammer"]}
         interests={["First-Person Shooter", "Action", "Adventure", "JRPG", "RPG"]}
-        user={"LaserGhost99"}
       />
     </div>
   )
