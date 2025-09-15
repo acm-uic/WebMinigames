@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect, useContext } from "react";
 import { GoXCircle } from "react-icons/go";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import Editor from "../page/Editor";
+import Editor from "./Editor";
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { UserContext } from "../domain/UserContext";
 
-export default function PostViewPage() {
+export default function CreatePost() {
   const { createPost, isLoggedIn } = useContext(UserContext);
   const editorStateRef = useRef(undefined);
 
